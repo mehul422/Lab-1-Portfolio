@@ -44,7 +44,7 @@ body {
     color: var(--color-accent);
     border-radius: 5px;
     border-width: 0.4em;
-    border-bottom: 0.4em solid oklch(50% 50% 240); 
+    border-bottom: 0.4em solid oklch(60% 40% 210); 
     padding-bottom: 0.1em;
   }
 
