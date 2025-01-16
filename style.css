@@ -33,7 +33,7 @@ body {
     flex: 1;
     text-align: center;
     text-decoration: none;
-    background-color: skyblue; 
+    background-color: okclh(65% 50% 240); 
     color: white;
     padding: 0.5rem;
     font-weight: bold;
