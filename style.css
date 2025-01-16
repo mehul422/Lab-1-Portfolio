@@ -1,5 +1,5 @@
 :root {
-  --color-accent: oklch(50% 75% 240)
+  --color-accent: oklch(65% 50% 240)
 }
 
 html {
@@ -21,7 +21,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     background-color: darkcyan;
-    color: darkgray; 
+    color: whitesmoke; 
     padding: 1rem;
     margin-bottom: 2rem;
     border-bottom-width: 1px;
@@ -33,24 +33,24 @@ body {
     flex: 1;
     text-align: center;
     text-decoration: none;
-    background-color: 
-    color: inherit;
+    background-color: white; 
+    color: white;
     padding: 0.5rem;
     font-weight: bold;
   }
 
   nav a.current {
     background-color: lightblue;
-    color: white;
+    color: var(--color-accent);
     border-radius: 5px;
     border-width: 0.4em;
-    border-bottom: 0.4em solid oklch(65% 3% 200); 
+    border-bottom: 0.4em solid okclh(65% 50% 0); 
     padding-bottom: 0.1em;
   }
 
 
   nav a:hover {
-    background-color: lightblue;
+    background-color: oklch(65% 50% 240 95%);
     color: white;
     border-bottom: 0.1em solid var(--color-accent);
   }
