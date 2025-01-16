@@ -3,9 +3,10 @@ body {
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
-    width: 100%;
-    max-width: 500ch;
-    background-color: lightblue;
-    border: 2px solid red;
-    margin-inline: auto;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 70ch;
+    margin-inline: auto; 
   }
