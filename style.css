@@ -85,8 +85,25 @@ body {
     grid-row: span 3;
     gap: 1em;
   }
+
+  h3 {
+    font-size: 150%;
+    font-weight: bold;
+  }
   
   h2 {
     margin: 0;
+    font-size: 200%
+  }
+  
+  h1 {
+    font-size: 400%;
+    font-weight: bold;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    text-wrap: balance;
+    margin: 0.5em 0;
   }
   
