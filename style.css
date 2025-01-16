@@ -5,5 +5,7 @@ body {
     font: 100%/1.5 system-ui;
     width: 100%;
     max-width: 500ch;
+    background-color: lightblue;
+    border: 2px solid red;
     margin-inline: auto;
   }
