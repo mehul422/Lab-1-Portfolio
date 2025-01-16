@@ -21,6 +21,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     background-color: darkcyan;
+    color: darkgray; 
     padding: 1rem;
     margin-bottom: 2rem;
     border-bottom-width: 1px;
@@ -32,14 +33,15 @@ body {
     flex: 1;
     text-align: center;
     text-decoration: none;
+    background-color: 
     color: inherit;
     padding: 0.5rem;
     font-weight: bold;
   }
 
   nav a.current {
-    background-color: blanchedalmond;
-    color: aquamarine;
+    background-color: lightblue;
+    color: white;
     border-radius: 5px;
     border-width: 0.4em;
     border-bottom: 0.4em solid oklch(65% 3% 200); 
