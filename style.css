@@ -33,7 +33,7 @@ body {
     flex: 1;
     text-align: center;
     text-decoration: none;
-    background-color: okclh(65% 50% 240); 
+    background-color: oklch(65% 50% 240); 
     color: white;
     padding: 0.5rem;
     font-weight: bold;
@@ -44,7 +44,7 @@ body {
     color: var(--color-accent);
     border-radius: 5px;
     border-width: 0.4em;
-    border-bottom: 0.4em solid okclh(65% 50% 0); 
+    border-bottom: 0.4em solid oklch(65% 50% 0); 
     padding-bottom: 0.1em;
   }
 
