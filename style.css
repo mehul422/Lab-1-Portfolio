@@ -50,7 +50,7 @@ body {
 
 
   nav a:hover {
-    background-color: oklch(65% 50% 240 95%);
+    background-color: lightblue;
     color: white;
     border-bottom: 0.1em solid var(--color-accent);
   }
