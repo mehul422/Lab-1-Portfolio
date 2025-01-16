@@ -54,3 +54,7 @@ body {
     color: white;
     border-bottom: 0.1em solid var(--color-accent);
   }
+
+input, textarea, button {
+  font: inherit;
+}
