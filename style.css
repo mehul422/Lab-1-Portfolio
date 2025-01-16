@@ -42,7 +42,7 @@ body {
     color: aquamarine;
     border-radius: 5px;
     border-width: 0.4em;
-    border-bottom-color: oklch(65% 3% 200);  
+    border-bottom: 0.4em solid oklch(65% 3% 200); 
     padding-bottom: 0.1em;
   }
 
@@ -50,5 +50,5 @@ body {
   nav a:hover {
     background-color: lightblue;
     color: white;
-    border-bottom: var(--color-accent);
+    border-bottom: 0.1em solid var(--color-accent);
   }
