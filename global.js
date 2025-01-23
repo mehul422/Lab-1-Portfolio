@@ -24,9 +24,9 @@ for (let p of pages) {
   let url = p.url;
   let title = p.title;
 
-  // If we're not on the home page and the URL is relative, adjust it
+  // Adjust relative URLs by adding /Lab-1-Portfolio if we're not on the home page
   if (!ARE_WE_HOME && !url.startsWith('http') && !url.startsWith('/')) {
-    url = '../' + url;
+    url = '/Lab-1-Portfolio/' + url;
   }
 
   // Create a new <a> element
@@ -37,7 +37,7 @@ for (let p of pages) {
   // Append the link to the nav
   nav.append(a);
 
-  // Add the 'current' class if it's the active link
+  // Add the 'current' class if this is the active page
   a.classList.toggle(
     'current',
     a.host === location.host && a.pathname === location.pathname
