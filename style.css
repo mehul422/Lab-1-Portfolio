@@ -1,10 +1,39 @@
 :root {
   --color-accent: oklch(65% 50% 240); /* Accent color */
-  color-scheme: light dark;
+  color-scheme: light dark; /* Light/dark mode support */
 }
 
-html {
-  accent-color: var(--color-accent);
+/* Default theme (Light Mode) */
+html[data-theme="light"] {
+  background-color: white;
+  color: black;
+}
+
+html[data-theme="dark"] {
+  background-color: black;
+  color: white;
+}
+
+/* Other styles based on theme */
+body[data-theme="light"] {
+  background-color: white;
+  color: black;
+}
+
+body[data-theme="dark"] {
+  background-color: black;
+  color: white;
+}
+
+/* Nav Bar for Light Mode */
+html[data-theme="light"] nav {
+  background-color: #f4f4f4;
+  color: black;
+}
+
+html[data-theme="dark"] nav {
+  background-color: #222; /* Darker nav background */
+  color: #eee; /* Lighter text */
 }
 
 body {
@@ -14,6 +43,12 @@ body {
   margin-inline: auto;
   background-color: canvas;
   color: canvastext;
+}
+
+/* Light mode */
+html[data-theme="light"] body {
+  background-color: white;
+  color: black;
 }
 
 nav {
@@ -106,6 +141,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.5em 0;
 }
 
+/* Styling for the color-scheme dropdown */
 .color-scheme {
   position: absolute;
   top: 1rem;
@@ -120,8 +156,9 @@ select {
   padding: 0.5rem;
 }
 
+/* Dark Mode styles */
 @media (prefers-color-scheme: dark) {
-  body {
+  html[data-theme="dark"] body {
     background-color: black;
     color: white;
   }
