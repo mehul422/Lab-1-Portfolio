@@ -36,6 +36,7 @@ html[data-theme="dark"] nav {
   color: #eee; /* Lighter text */
 }
 
+/* Body styling */
 body {
   font: 100%/1.5 system-ui;
   width: 90%;
