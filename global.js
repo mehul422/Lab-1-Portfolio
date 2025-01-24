@@ -4,6 +4,25 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `
+      <label class="color-scheme">
+        Theme:
+        <select id="color-scheme-selector">
+          <option value="auto">Automatic (OS Default)</option>
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+        </select>
+      </label>`
+  );
+
+  const select = document.querySelector('#color-scheme-selector');
+
+  select.addEventListener('input', function (event) {
+        console.log('Color scheme changed to', event.target.value);
+  });
+  
 // Define the pages array with links
 let pages = [
   { url: 'index.html', title: 'Home' },
@@ -51,4 +70,6 @@ for (let p of pages) {
   if (a.host !== location.host) {
     a.target = '_blank';
   }
+
+
 }
