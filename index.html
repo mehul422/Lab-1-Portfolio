@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav></nav>
+    <nav>       
+        <div class="color-scheme">
+            <label for="theme-switch">Theme:</label>
+            <select id="theme-switch" name="theme-switch">
+                <option value="auto" selected>Automatic</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+    </nav>
 
     <h1>Mehul Verma</h1>
     <p>Hello DSC 106! I'm a second-year student majoring in Data Science with a specialization
@@ -16,6 +25,7 @@
         basketball, and doing math for fun. 
     </p>
     <img src="images/kobe.jpeg" alt="A picture of Kobe Bryant and the back of his jersey with the number 24 on it.">
+    
     <script type="module" src="global.js"></script>
 </body>
 </html>
