@@ -1,13 +1,16 @@
+/* Root level color scheme and accent settings */
 :root {
   --color-accent: oklch(65% 50% 240);
   color-scheme: light dark;
 }
 
+/* Ensure general color scheme styling */
 html {
   accent-color: var(--color-accent);
   color-scheme: light dark;
 }
 
+/* General body settings */
 body {
   font: 100%/1.5 system-ui;
   width: 90%;
@@ -15,8 +18,34 @@ body {
   margin-inline: auto;
   background-color: canvas;
   color: canvastext;
+  margin-top: 20px; /* Adds space between the theme switcher and body content */
 }
 
+/* Style for the theme switcher */
+.color-scheme {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 10px; /* Adds some spacing around the theme switcher */
+  margin-top: 1rem; /* Adds space between theme switcher and body */
+}
+
+/* Styling for the <select> element inside the theme switcher */
+#theme-switch {
+  padding: 5px;
+  font-size: 1rem;
+  margin-top: 0.5rem; /* Adds space above the select dropdown */
+  background-color: canvas; /* Matches the body background */
+  color: canvastext; /* Matches the text color */
+}
+
+/* Optional: Hover effect for the select dropdown */
+#theme-switch:hover {
+  background-color: oklch(60% 20% 180); /* Light hover effect */
+}
+
+/* Navigation styling */
 nav {
   --border-color: oklch(50% 10% 200 / 40%);
   display: flex;
@@ -56,6 +85,7 @@ nav a:hover {
   border-bottom: 0.1em solid var(--color-accent);
 }
 
+/* Form and input styling */
 input, textarea, button {
   background-color: canvas;
   color: canvastext;
@@ -78,17 +108,20 @@ label {
   grid-column: 1 / -1;
 }
 
+/* Grid layout for projects */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
 }
 
+/* Article layout */
 article {
   grid-template-columns: subgrid;
   grid-row: span 3;
   gap: 1em;
 }
 
+/* Heading styles */
 h3 {
   font-size: 150%;
   font-weight: bold;
