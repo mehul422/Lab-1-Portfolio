@@ -65,3 +65,20 @@ document.body.insertAdjacentHTML(
         </select>
       </label>`
   );
+
+  const themeSwitch = document.querySelector('#theme-switch'); // Get the select element
+
+  themeSwitch.addEventListener('input', function (event) {
+    const selected = event.target.value; // Get the selected value
+  
+    console.log('color scheme changed to', selected); // Log the change
+  
+    // Apply the selected value to the color-scheme property of the document
+    if (selected === "auto") {
+      document.documentElement.style.colorScheme = 'light dark'; // Follow system theme
+    } 
+    else {
+      document.documentElement.style.colorScheme = selected; // Apply light or dark theme
+    }
+  });
+  
