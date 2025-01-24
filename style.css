@@ -1,5 +1,5 @@
 :root {
-  --color-accent: oklch(65% 50% 240)
+  --color-accent: oklch(65% 50% 240);
   color-scheme: light dark;
 }
 
@@ -9,108 +9,103 @@ html {
 }
 
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-    width: 90%;
-    max-width: 70ch;
-    margin-inline: auto;
-    background-color: canvas;
-    color: canvastext;
-  }
+  font: 100%/1.5 system-ui;
+  width: 90%;
+  max-width: 70ch;
+  margin-inline: auto;
+  background-color: canvas;
+  color: canvastext;
+}
 
-  nav {
-    --border-color: oklch(50% 10% 200 / 40%);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: canvas;
-    color: canvastext; 
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--border-color);
-  }
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: canvas;
+  color: canvastext;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--border-color);
+}
 
-  nav a {
-    flex: 1;
-    text-align: center;
-    text-decoration: none;
-    background-color: oklch(65% 50% 240); 
-    color: white;
-    padding: 0.5rem;
-    font-weight: bold;
-  }
+nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+}
 
-  nav a.current {
-    background-color: lightblue;
-    color: var(--color-accent);
-    border-radius: 5px;
-    border-width: 0.4em;
-    border-bottom: 0.4em solid oklch(60% 40% 210); 
-    padding-bottom: 0.1em;
-  }
+nav a.current {
+  background-color: lightblue;
+  color: var(--color-accent);
+  border-radius: 5px;
+  border-width: 0.4em;
+  border-bottom: 0.4em solid oklch(60% 40% 210);
+  padding-bottom: 0.1em;
+}
 
+nav a:hover {
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+  color: white;
+  border-bottom: 0.1em solid var(--color-accent);
+}
 
-  nav a:hover {
-    background-color: lightblue;
-    color: white;
-    border-bottom: 0.1em solid var(--color-accent);
-  }
+input, textarea, button {
+  background-color: canvas;
+  color: canvastext;
+  font: inherit;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  gap: 1em;
+}
 
-  input, textarea, button {
-    background-color: canvas;
-    color: canvastext;
-    font: inherit;
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
-    gap: 1em;
-  }
-  
-  form {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1em;
-  }
-  
-  label {
-    display: grid;
-    grid-template-columns: subgrid; 
-    grid-column: 1 / -1;
-  }
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
 
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr))
-  }
+label {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+}
 
-  article {
-    grid-template-columns: subgrid;
-    grid-row: span 3;
-    gap: 1em;
-  }
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
 
-  h3 {
-    font-size: 150%;
-    font-weight: bold;
-  }
-  
-  h2 {
-    margin: 0;
-    font-size: 200%
-  }
-  
-  h1 {
-    font-size: 400%;
-    font-weight: bold;
-  }
+article {
+  grid-template-columns: subgrid;
+  grid-row: span 3;
+  gap: 1em;
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    line-height: 1.1;
-    text-wrap: balance;
-    margin: 0.5em 0;
-  }
-  
+h3 {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 0;
+  font-size: 200%;
+}
+
+h1 {
+  font-size: 400%;
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0.5em 0;
+}
