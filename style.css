@@ -1,9 +1,11 @@
 :root {
   --color-accent: oklch(65% 50% 240)
+  color-scheme: light dark;
 }
 
 html {
   accent-color: var(--color-accent);
+  color-scheme: light dark;
 }
 
 body {
@@ -13,15 +15,17 @@ body {
     font: 100%/1.5 system-ui;
     width: 90%;
     max-width: 70ch;
-    margin-inline: auto; 
+    margin-inline: auto;
+    background-color: canvas;
+    color: canvastext;
   }
 
   nav {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #FFDAB9;
-    color: whitesmoke; 
+    background-color: canvas;
+    color: canvastext; 
     padding: 1rem;
     margin-bottom: 2rem;
     border-bottom-width: 1px;
@@ -56,6 +60,8 @@ body {
   }
 
   input, textarea, button {
+    background-color: canvas;
+    color: canvastext;
     font: inherit;
     display: grid;
     grid-template-columns: subgrid;
