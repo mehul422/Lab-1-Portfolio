@@ -28,7 +28,7 @@ function setColorScheme(scheme) {
   if (scheme === 'auto') {
     // Revert to the OS's default theme (light or dark)
     document.documentElement.removeAttribute('data-theme');
-    document.documentElement.setAttribute('color-scheme', 'light dark');
+    document.documentElement.setAttribute('color-scheme', 'light dark'); // Allow OS to choose
   } else {
     // Apply the selected theme (light or dark)
     document.documentElement.setAttribute('data-theme', scheme);
