@@ -52,3 +52,16 @@ for (let p of pages) {
     a.target = '_blank';
   }
 }
+
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `
+      <label class="color-scheme">
+        Theme:
+        <select id="theme-switch">
+          <option value="auto" ${window.matchMedia("(prefers-color-scheme: dark)").matches ? 'selected' : ''}>Automatic</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>`
+  );
