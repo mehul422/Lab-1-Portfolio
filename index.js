@@ -1,33 +1,28 @@
-import { fetchJSON, renderProjects, fetchGithubData } from './global.js';
+import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';  // Import functions
 
-try {
-  const projects = await fetchJSON('./lib/projects.json');
+// Fetch project data
+const projects = await fetchJSON('./lib/projects.json');
 
-  // Check if projects data is fetched correctly and is an array
-  if (projects && Array.isArray(projects) && projects.length > 0) {
-    const latestProjects = projects.slice(0, 3);
-    const projectsContainer = document.querySelector('.projects');
-    renderProjects(latestProjects, projectsContainer, 'h2');
-  } else {
-    console.warn('No projects data found or failed to fetch.');
-  }
+// Filter the first 3 projects
+const latestProjects = projects.slice(0, 3);
 
-  const githubData = await fetchGitHubData('mehul422');
+// Select the container where the projects will be displayed
+const projectsContainer = document.querySelector('.projects');
 
-  // Check if GitHub data is available before updating the profile stats
-  const profileStats = document.querySelector('#profile-stats');
-  if (profileStats && githubData) {
+// Render the filtered projects
+renderProjects(latestProjects, projectsContainer, 'h2');
+
+const githubData = await fetchGitHubData('t6chow');
+
+const profileStats = document.querySelector('#profile-stats');
+
+if (profileStats) {
     profileStats.innerHTML = `
-      <dl>
-        <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
-        <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
-        <dt>Followers:</dt><dd>${githubData.followers}</dd>
-        <dt>Following:</dt><dd>${githubData.following}</dd>
-      </dl>
-    `;
-  } else {
-    console.warn('GitHub data not fetched or not available.');
+          <dl>
+            <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
+            <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
+            <dt>Followers:</dt><dd>${githubData.followers}</dd>
+            <dt>Following:</dt><dd>${githubData.following}</dd>
+          </dl>
+      `;
   }
-} catch (error) {
-  console.error('Error fetching data:', error);
-}

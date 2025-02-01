@@ -8,7 +8,7 @@ const projectsTitle = document.querySelector('.projects-title');
 
 // Calculate the number of projects and update the text of the h1 tag
 const projectCount = projects.length;
-projectsTitle.textContent = `${projectCount} Projects`; // Example: "12 Projects"
+projectsTitle.textContent = `${projectCount} Projects`;
 
 // Select the container to render projects into
 const projectsContainer = document.querySelector('.projects');
