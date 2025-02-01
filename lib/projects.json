@@ -1,62 +1,74 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "Project 1",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora quae eum aperiam expedita fugit fugiat provident omnis? Ipsa, perspiciatis soluta. Possimus molestiae earum assumenda ratione accusamus iure eaque labore fuga?"
+        "year": 2025,
+        "description": "Worked extensively on a gripping data visualization regarding average monthly climate measurements for six major U.S. cities including San Francisco, San Diego, Miami, Houston, New York City, and Chicago."
     },
     {
-        "title": "Eius deleniti nobis omnis.",
+        "title": "Lab 1",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Recusandae similique quo aut ratione, laborum eligendi atque aspernatur totam, iusto cumque dolorem cum corporis enim qui possimus a quas? Aut, perferendis. Facere eveniet, ipsum odit iusto eum veniam a."
+        "year": 2024,
+        "description": "Worked on a lab that extensively involved HTML/CSS and an intro to the web platform."
     },
     {
-        "title": "Sint recusandae obcaecati officiis.",
+        "title": "Lab 2",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Debitis laudantium consequuntur nam beatae quam in est deserunt saepe, reprehenderit asperiores voluptas quidem quasi omnis atque dolor quas eos nesciunt mollitia blanditiis, distinctio deleniti optio excepturi id iste. Animi."
+        "year": 2025,
+        "description": "Worked on a lab that delved deeper into the CSS library and learned how to style webpages in a very direct and engaging manner."
     },
     {
-        "title": "Temporibus illum numquam molestiae!",
+        "title": "Lab 3",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Sapiente corporis iste, numquam pariatur doloremque ipsa vel repudiandae necessitatibus odio magni maiores provident aspernatur nulla minus accusantium cumque quasi unde esse. Obcaecati cumque iure perspiciatis molestias accusamus et excepturi!"
+        "year": 2025,
+        "description": "Worked with the very famous web development backend platform JS and got an intro on how to make the same elements with HTML/CSS with JS, added a couple extra elements using JS."
     },
     {
-        "title": "Maxime quidem laborum dolores!",
+        "title": "Traffic Detection on Busy Streets",
+        "year": 2023,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Ducimus, iusto commodi! Blanditiis suscipit temporibus maxime dicta repellendus, tempore maiores eius corrupti saepe omnis odit quam tempora nisi illo vitae excepturi ipsa voluptatem, eos nam reprehenderit explicabo? Corporis, sunt."
+        "description": "Collabed with a Stanford/MIT alumni to analyze traffic patterns in residential and business complexes, and built a TensorFlow/Keras AI CNN to classify vehicles in busy streets in Irvine."
     },
     {
-        "title": "Molestias cupiditate expedita voluptatibus.",
+        "title": "Taylor Swift Discography Music Analysis",
+        "year": 2023,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Et non voluptas neque laudantium quia. Distinctio, sint animi tempore repellendus repellat ipsa commodi necessitatibus reiciendis ipsam provident nulla, id architecto amet voluptatem vel porro unde sequi quod asperiores doloremque."
+        "description": "Completed midterm projects for DSC 10 analyzing Taylor Swift's discography and identified the two similar songs in her discography with 95% accuracy."
     },
     {
-        "title": "Fugiat est cum nihil.",
+        "title": "NASA Meteorite Landings",
+        "year": 2023,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Impedit saepe consequatur quibusdam recusandae libero porro illo id voluptatem sunt dicta vero itaque non, asperiores iure velit blanditiis qui accusantium? Nulla at quis sapiente, dicta illum pariatur natus aperiam?"
+        "description": "Project conducting analysis on NASA's open source dataset of meteorite landings. Conducted hypothesis testing using Python, including defining hypotheses, and getting a 94% efficiency for the most observed asteroids in 2000s using Babypandas"
     },
     {
-        "title": "Voluptas, libero alias. Inventore.",
+        "title": "Prototype Web Browser Framework",
+        "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Dolorem quas, quo id aliquam ducimus eveniet consectetur blanditiis officia nam ullam vitae, eum sapiente debitis exercitationem? Eligendi modi sint optio sapiente! Fuga nemo natus explicabo nisi quae quasi error."
+        "description": "Built a prototype web browser using Java and stack data structures. Tested and achieved 92% accuracy using JUnit 5 for functionality validation."
     },
     {
-        "title": "Dolore labore voluptates libero!",
+        "title": "Arabic Numeral Image Processing Model",
+        "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Beatae iure quaerat quo eum nam veritatis a vel provident sint odit enim veniam alias distinctio, unde quos! Temporibus aliquid culpa aut. Fuga, recusandae totam ex magnam consequatur assumenda doloribus."
+        "description": "Developed a model to retrieve the three closest matches for Arabic numeral test images from a large dataset trained on 100,000+ images. Achieved 96.7% accuracy using a min-heap priority queue with Euclidean distance for pixel similarity."
     },
     {
-        "title": "Obcaecati reprehenderit maiores molestiae?",
+        "title": "Power Outages in the Continental U.S.",
+        "year": 2024,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Eum nihil incidunt odit placeat quaerat sed eligendi animi suscipit tempore? A, debitis deleniti. A, non totam maxime facere aliquid unde nemo minus perferendis provident asperiores, illum, nesciunt quasi sunt."
+        "description": "Utilized predictive modeling on test data in the real-world to analyze power outage trends across the U.S. over 15+ years. Used Python’s scikit-learn for machine learning and Pandas to create a regression model, achieving an RMSE of 0.075."
     },
     {
-        "title": "Sint modi temporibus harum.",
+        "title": "Southern California Cybersecurity Mayors Cup",
+        "year": 2022,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Id qui quaerat itaque repellendus ipsum iusto. Dolorem, voluptates ex rerum blanditiis totam cumque sit amet rem dignissimos id saepe delectus esse voluptatibus iure quaerat quibusdam ut atque at nisi."
+        "description": "Participated in a regional cybersecurity competition that emphasized multiple offensive and defensive techniques such as password encrypting, image processing, analyzing incoming and outgoing DNS cache packets and network logging, cryptography/decoding using a Caesar cipher and hashing decoder."
     },
     {
-        "title": "Rem impedit reprehenderit nam!",
+        "title": "Riverside County Hackathon",
+        "year": 2022,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Voluptate voluptatibus perspiciatis consectetur modi dolores, non laboriosam commodi? Aut ut eaque, aspernatur ipsa nobis necessitatibus eos explicabo obcaecati distinctio corrupti doloremque vel ducimus qui fuga aliquid suscipit nulla soluta!"
+        "description": "Participated in a statewide coding competition that emphasized multiple Java and Python programming challenges that had similar difficulty to LeetCode exercises."
     }
 ]
