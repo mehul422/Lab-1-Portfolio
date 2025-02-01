@@ -148,3 +148,27 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
   margin: 0.5em 0;
 }
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  font-weight: bold;
+  text-align: right; /* Align labels to the right */
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  text-align: left; /* Align descriptions to the left */
+}
+
+@media (max-width: 600px) {
+  #profile-stats dl {
+    grid-template-columns: repeat(2, 1fr); /* Stack to 2 columns on smaller screens */
+  }
+}
