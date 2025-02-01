@@ -13,5 +13,7 @@ projectsTitle.textContent = `${projectCount} Projects`;
 // Select the container to render projects into
 const projectsContainer = document.querySelector('.projects');
 
-// Render the projects
+// Render all the projects (no filtering)
 renderProjects(projects, projectsContainer, 'h2');
+
+
