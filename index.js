@@ -12,7 +12,7 @@ const projectsContainer = document.querySelector('.projects');
 // Render the filtered projects
 renderProjects(latestProjects, projectsContainer, 'h2');
 
-const githubData = await fetchGitHubData('t6chow');
+const githubData = await fetchGitHubData('mehul422');
 
 const profileStats = document.querySelector('#profile-stats');
 
