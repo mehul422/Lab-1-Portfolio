@@ -100,7 +100,7 @@ else {
 export async function fetchJSON(url) {
   try {
     const response = await fetch(url);
-    console.log(response);
+    console.log('Fetched response:', response);
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
@@ -113,6 +113,7 @@ export async function fetchJSON(url) {
 
 // Render multiple projects dynamically
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  console.log('Rendering projects:', projects); // Debug: Log the projects being rendered
   containerElement.innerHTML = '';  // Clear any existing content
 
   projects.forEach(project => {
@@ -128,8 +129,11 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
   });
 }
 
+// Fetch GitHub data from the provided username
 export async function fetchGitHubData(username) {
+  console.log(`Fetching GitHub data for user: ${username}`); // Debug: Log the username being fetched
   return fetchJSON(`https://api.github.com/users/${username}`);
 }
+
 
   
