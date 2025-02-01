@@ -96,36 +96,36 @@ else {
     }
   });
 
-  export async function fetchJSON(url) {
-    try {
-        // Fetch the JSON file from the given URL
-        const response = await fetch(url);
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch projects: ${response.statusText}`);
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching or parsing JSON data:', error);
+// Fetch JSON data from the given URL
+export async function fetchJSON(url) {
+  try {
+    const response = await fetch(url);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
 }
 
-fetchJSON('lib/projects.json')
-    .then(data => console.log("Fetched Data:", data))
-    .catch(error => console.error("Fetch Error:", error));
+// Render multiple projects dynamically
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  containerElement.innerHTML = '';  // Clear any existing content
 
-export function renderProjects(project, containerElement, headingLevel='h2') {
-  containerElement.innerHTML = '';
+  projects.forEach(project => {
+    const article = document.createElement('article');
 
-  const article = document.createElement('article');
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${project.image}" alt="${project.title}">
+      <p>${project.description}</p>
+    `;
 
-  article.innerHTML = `
-    <h3>${project.title}</h3>
-    <img src="${project.image}" alt="${project.title}">
-    <p>${project.description}</p>
-`;
-
-  containerElement.appendChild(article);
+    containerElement.appendChild(article);
+  });
 }
+
   
