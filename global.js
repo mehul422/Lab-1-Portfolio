@@ -110,4 +110,9 @@ else {
         console.error('Error fetching or parsing JSON data:', error);
     }
 }
+
+fetchJSON('../lib/projects.json')
+    .then(data => console.log("Fetched Data:", data))
+    .catch(error => console.error("Fetch Error:", error));
+
   
