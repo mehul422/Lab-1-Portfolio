@@ -1,7 +1,7 @@
 import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';  // Import functions
 
 // Fetch project data
-const projects = await fetchJSON('./lib/projects.json');
+const projects = await fetchJSON('https://mehul422.github.io/Lab-1-Portfolio/lib/projects.json');
 
 // Filter the first 3 projects
 const latestProjects = projects.slice(0, 3);
