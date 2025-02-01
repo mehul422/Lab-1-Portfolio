@@ -159,12 +159,17 @@ h1, h2, h3, h4, h5, h6 {
 #profile-stats dt {
   grid-row: 1;
   font-weight: bold;
+  font-family: 'Roboto', sans-serif;
   text-align: right; /* Align labels to the right */
 }
 
 #profile-stats dd {
   grid-row: 2;
   text-align: left; /* Align descriptions to the left */
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #333;
+  font-variant-numeric: oldstyle;
 }
 
 @media (max-width: 600px) {
