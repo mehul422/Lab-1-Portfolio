@@ -111,7 +111,7 @@ else {
     }
 }
 
-fetchJSON('../lib/projects.json')
+fetchJSON('lib/projects.json')
     .then(data => console.log("Fetched Data:", data))
     .catch(error => console.error("Fetch Error:", error));
 
