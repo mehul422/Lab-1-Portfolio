@@ -68,10 +68,24 @@ document.body.insertAdjacentHTML(
 
   const themeSwitch = document.querySelector('#theme-switch'); // Get the select element
 
+  // Restore the user's preference from localStorage on page load
+if ('colorScheme' in localStorage) {
+    const savedScheme = localStorage.colorScheme; // Get saved theme
+    document.documentElement.style.colorScheme = savedScheme; // Apply saved theme
+    themeSwitch.value = savedScheme; // Update dropdown to match
+} 
+else {
+    // Default behavior (Automatic)
+    document.documentElement.style.colorScheme = 'light dark';
+    themeSwitch.value = 'auto';
+}
+
   themeSwitch.addEventListener('input', function (event) {
     const selected = event.target.value; // Get the selected value
   
     console.log('color scheme changed to', selected); // Log the change
+
+    localStorage.colorScheme = selected; // Saving user's pref to localStorage variable
   
     // Apply the selected value to the color-scheme property of the document
     if (selected === "auto") {
@@ -81,4 +95,19 @@ document.body.insertAdjacentHTML(
       document.documentElement.style.colorScheme = selected; // Apply light or dark theme
     }
   });
+
+  export async function fetchJSON(url) {
+    try {
+        // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+}
   
