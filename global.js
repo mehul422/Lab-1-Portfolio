@@ -115,4 +115,17 @@ fetchJSON('lib/projects.json')
     .then(data => console.log("Fetched Data:", data))
     .catch(error => console.error("Fetch Error:", error));
 
+export function renderProjects(project, containerElement, headingLevel='h2') {
+  containerElement.innerHTML = '';
+
+  const article = document.createElement('article');
+
+  article.innerHTML = `
+    <h3>${project.title}</h3>
+    <img src="${project.image}" alt="${project.title}">
+    <p>${project.description}</p>
+`;
+
+  containerElement.appendChild(article);
+}
   
