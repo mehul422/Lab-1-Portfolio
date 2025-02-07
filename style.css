@@ -257,7 +257,7 @@ path {
   fill: oklch(60% 45% 0) !important;
 }
 
-.legend li.selected {
+.legend li.selected .swatch {
   font-weight: bold; /* Make the selected legend item stand out */
   color: oklch(60% 45% 0); /* Same color as selected pie slice */
 }
