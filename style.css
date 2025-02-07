@@ -253,12 +253,17 @@ path {
   display: inline-block;
 }
 
+/* Define the color for the selected wedge */
 .selected {
-  fill: oklch(60% 45% 0) !important;
+  --color: oklch(60% 45% 0) !important; /* Set the selected color using a CSS variable */
+}
+
+.selected:is(path) {
+  fill: var(--color); /* Apply the selected color to the pie slice */
 }
 
 .legend li.selected .swatch {
-  background-color: oklch(60% 45% 0);
+  background-color: var(--color); /* Apply the same selected color to the legend swatch */
 }
 
 /* Media Queries for responsiveness */
