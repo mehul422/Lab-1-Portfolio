@@ -26,6 +26,16 @@ if (projects.length === 0) {
         // Render the projects
         renderProjects(projects, projectsContainer, 'h2');
         renderPieChart(projects); // Render the pie chart for all projects initially
+
+        // Reattach search functionality
+        document.querySelector('#search-bar').addEventListener('input', function () {
+            let query = this.value.toLowerCase();
+            let filteredProjects = projects.filter(project =>
+                project.name.toLowerCase().includes(query) ||
+                project.description.toLowerCase().includes(query)
+            );
+            renderProjects(filteredProjects, projectsContainer, 'h2');
+        });
     }, 500); // Wait for 500ms before rendering the projects
 }
 
@@ -67,34 +77,31 @@ function renderPieChart(projectsGiven) {
       .append('path')
       .attr('d', arcGenerator)
       .attr('fill', (d, idx) => colors(idx))
-      .on('click', function(event, d) { // Remove `i` and use `this`
-        const i = arcData.indexOf(d); // Get the index from arcData
+      .on('click', function(event, d) {
+        const i = arcData.indexOf(d);
   
         console.log('Clicked wedge index (i):', i);
         console.log('Clicked data:', d);
   
-        // Ensure `selectedIndex` is within the bounds of the pieData
         if (i >= 0 && i < pieData.length) {
           selectedIndex = selectedIndex === i ? -1 : i;
         } else {
           console.error('Invalid selectedIndex:', i);
         }
   
-        // Highlight the selected arc and update the legend
         newSVG.selectAll('path')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
   
         legend.selectAll('li')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected legend item
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
   
-        // Filter and render projects based on selected index
         if (selectedIndex === -1) {
-          renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
+          renderProjects(projects, projectsContainer, 'h2');
         } else {
-          const selectedYear = pieData[selectedIndex]?.label; // Get the year of the selected wedge
+          const selectedYear = pieData[selectedIndex]?.label;
           if (selectedYear) {
             const filteredProjects = projects.filter(project => project.year === selectedYear);
-            renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+            renderProjects(filteredProjects, projectsContainer, 'h2');
           } else {
             console.error('Selected year not found in pieData');
           }
@@ -107,4 +114,4 @@ function renderPieChart(projectsGiven) {
         .attr('class', 'legend-item')
         .html(`<span class="swatch" style="background-color:${colors(idx)};"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
     });
-  }    
+}   
