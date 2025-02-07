@@ -30,30 +30,31 @@ if (projects.length === 0) {
 
 let colors = ['gold', 'purple'];
 
-let arc = d3.arc().innerRadius(0).outerRadius(50)({
-    startAngle: 0,
-    endAngle: 2 * Math.PI,
-  });
+// Arc generator function
+let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
+// Pie chart data
 let data = [1, 2];
 
-let total = 0;
+// Calculate the total value
+let total = data.reduce((sum, d) => sum + d, 0);
 
-for (let d of data) {
-  total += d;
-}
-
+// Calculate the angles for each slice
 let angle = 0;
 let arcData = [];
-
-for (let d of data) {
+data.forEach(d => {
   let endAngle = angle + (d / total) * 2 * Math.PI;
   arcData.push({ startAngle: angle, endAngle });
   angle = endAngle;
-}
+});
 
-let arcs = arcData.map((d) => arcGenerator(d));
+// Generate the arcs for each slice
+let arcs = arcData.map(d => arcGenerator(d));
 
+// Append the paths for each slice with the colors
 arcs.forEach((arc, idx) => {
-    d3.select('svg').append('path').attr('d', arc).attr('fill', colors[idx]);
-  })
+  d3.select('svg')
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', colors[idx]);
+});
