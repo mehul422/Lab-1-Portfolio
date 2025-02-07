@@ -226,3 +226,18 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
+/* Light theme styles */
+.light-theme {
+  --background-color: #fff;
+  --text-color: #000;
+  --accent-color: oklch(65% 50% 240);
+}
+
+/* Dark theme styles */
+.dark-theme {
+  --background-color: #333;
+  --text-color: #fff;
+  --accent-color: oklch(65% 50% 240);
+}
+
+

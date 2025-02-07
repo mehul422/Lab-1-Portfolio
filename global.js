@@ -41,7 +41,7 @@ for (let p of pages) {
   // Add the 'current' class if this is the active page
   a.classList.toggle(
     'current',
-    a.host === location.host && a.pathname === location.pathname
+    a.href === location.href || (a.pathname === location.pathname && a.host === location.host)
   );
 
   // Add a line break after each link (optional)
@@ -54,93 +54,101 @@ for (let p of pages) {
 }
 
 document.body.insertAdjacentHTML(
-    'afterbegin',
-    `
-      <label class="color-scheme">
-        Theme:
-        <select id="theme-switch">
-          <option value="auto" ${window.matchMedia("(prefers-color-scheme: dark)").matches ? 'selected' : ''}>Automatic</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
-      </label>`
-  );
+  'afterbegin',
+  `
+    <label class="color-scheme">
+      Theme:
+      <select id="theme-switch">
+        <option value="auto" ${window.matchMedia("(prefers-color-scheme: dark)").matches ? 'selected' : ''}>Automatic</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>`
+);
 
-  const themeSwitch = document.querySelector('#theme-switch'); // Get the select element
+const themeSwitch = document.querySelector('#theme-switch'); // Get the select element
 
-  // Restore the user's preference from localStorage on page load
-if ('colorScheme' in localStorage) {
-    const savedScheme = localStorage.colorScheme; // Get saved theme
-    document.documentElement.style.colorScheme = savedScheme; // Apply saved theme
-    themeSwitch.value = savedScheme; // Update dropdown to match
-} 
-else {
-    // Default behavior (Automatic)
+// Initial theme setup based on localStorage or system preference
+window.addEventListener('DOMContentLoaded', () => {
+  const savedScheme = localStorage.colorScheme;
+
+  if (savedScheme) {
+    document.documentElement.style.colorScheme = savedScheme;
+    themeSwitch.value = savedScheme;
+  } else {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
     document.documentElement.style.colorScheme = 'light dark';
-    themeSwitch.value = 'auto';
+    themeSwitch.value = systemTheme; // Set default dropdown to match system preference
+  }
+});
+
+// Listen for theme change via dropdown
+themeSwitch.addEventListener('input', (event) => {
+  const selected = event.target.value;
+  localStorage.colorScheme = selected; // Save to localStorage
+
+  if (selected === 'auto') {
+    document.documentElement.style.colorScheme = 'light dark'; // Follow system theme
+  } else {
+    document.documentElement.style.colorScheme = selected;
+    if (selected === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+  }
+});
+
+export async function fetchJSON(url) {
+  try {
+    // Fetch the JSON file from the given URL
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+    return [];
+  }
 }
 
-  themeSwitch.addEventListener('input', function (event) {
-    const selected = event.target.value; // Get the selected value
-  
-    console.log('color scheme changed to', selected); // Log the change
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  // Clear any existing content
+  containerElement.innerHTML = '';
 
-    localStorage.colorScheme = selected; // Saving user's pref to localStorage variable
-  
-    // Apply the selected value to the color-scheme property of the document
-    if (selected === "auto") {
-      document.documentElement.style.colorScheme = 'light dark'; // Follow system theme
-    } 
-    else {
-      document.documentElement.style.colorScheme = selected; // Apply light or dark theme
-    }
+  if (!projects || projects.length === 0) {
+    containerElement.innerHTML = '<p>No projects found.</p>';
+    return;
+  }
+
+  // Iterate over each project and render its details
+  projects.forEach(project => {
+    const article = document.createElement('article');
+
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${project.image}" alt="${project.title}">
+      <div class="project-info">
+        <p>${project.description}</p>
+        <span class="project-year">c. ${project.year}</span>
+      </div>
+    `;
+
+    // Append the article to the container
+    containerElement.appendChild(article);
   });
+}
 
-  export async function fetchJSON(url) {
-    try {
-        // Fetch the JSON file from the given URL
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch projects: ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        return data;
-  
-    } catch (error) {
-        console.error('Error fetching or parsing JSON data:', error);
-        return [];
-    }
-    
-  }
-  
-  export function renderProjects(projects, containerElement, headingLevel = 'h2') {
-    // Clear any existing content
-    containerElement.innerHTML = '';
-  
-    // Iterate over each project and render its details
-    projects.forEach(project => {
-        const article = document.createElement('article');
-  
-        article.innerHTML = `
-            <${headingLevel}>${project.title}</${headingLevel}>
-            <img src="${project.image}" alt="${project.title}">
-            <div class="project-info">
-                <p>${project.description}</p>
-                <span class="project-year">c. ${project.year}</span>
-            </div>
-        `;
-  
-        // Append the article to the container
-        containerElement.appendChild(article);
-    });
-  }
-  
-  export async function fetchGitHubData(username) {
-    return fetchJSON(`https://api.github.com/users/${username}`);
-    
-  }
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}
 
 
   
