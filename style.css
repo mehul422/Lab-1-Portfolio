@@ -208,76 +208,34 @@ h1, h2, h3, h4, h5, h6 {
   overflow: visible;
 }
 
-#projects-pie-plot:has(path:hover) {
-  path:not(:hover) {
-    opacity: 0.5;
-  }
+#projects-pie-plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
 }
 
-path {
-  transition: 300ms;
-  cursor: pointer;
-}
-
-/* Flexbox layout for the legend */
 .legend {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping of legend items */
+  flex-direction: column;
   gap: 10px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-top: 10px;
-  flex: 1; /* Allow legend to take available space */
-  min-width: 15em; /* Minimum width for the legend */
+  font-size: 0.9em;
 }
 
-/* Style for each legend item */
 .legend li {
   display: flex;
+  gap: 5px;
   align-items: center;
-  gap: 8px;
-  padding: 5px;
-  background: #f9f9f9;
-  border-radius: 5px;
-  list-style: none;
-  width: 30%; /* Width of each legend item in large viewports */
 }
 
-/* Swatch styles */
-.swatch {
-  width: 16px;
-  height: 16px;
-  aspect-ratio: 1 / 1;
-  background-color: var(--color); /* Use the color assigned in JS */
-  border-radius: 50%;
-  display: inline-block;
+.legend li.selected {
+  font-weight: bold;
+  color: var(--color-accent);
 }
 
-.selected {
-  --color: oklch(60% 45% 0) !important;
-}
-
-#selected:is(path) {
-    fill: var(--color);
-}
-
-/* Media Queries for responsiveness */
-
-/* For medium screens (between 600px and 900px), make the legend items 2 per row */
-@media (max-width: 900px) {
-  .legend li {
-    width: 45%; /* 2 items per row */
-  }
-}
-
-/* For smaller screens (below 600px), stack the legend items vertically */
-@media (max-width: 600px) {
-  .legend li {
-    width: 100%; /* Each item takes up the full width */
-  }
-
-  .container {
-    flex-direction: column; /* Stack the pie chart and legend vertically */
-    align-items: center; /* Center-align items */
-  }
+.legend li .swatch {
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  background-color: currentColor;
 }
