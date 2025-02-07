@@ -77,7 +77,7 @@ function renderPieChart(projectsGiven) {
 // Search functionality
 let query = '';
 let searchInput = document.querySelector('.searchBar');
-searchInput.addEventListener('change', (event) => {
+searchInput.addEventListener('input', (event) => {
   // update query value
   query = event.target.value;
 
@@ -90,6 +90,10 @@ searchInput.addEventListener('change', (event) => {
   // Render filtered projects and the pie chart
   renderProjects(filteredProjects, projectsContainer, 'h2');
   renderPieChart(filteredProjects); // Re-render the pie chart for filtered projects
+
+  // Optional: Update the title to reflect the number of filtered projects
+  const projectsTitle = document.querySelector('.projects-title');
+  projectsTitle.textContent = `${filteredProjects.length} Projects`;
 });
 
 // Initially call the render function on page load
