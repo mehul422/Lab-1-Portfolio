@@ -216,6 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 
 path {
   transition: 300ms;
+  cursor: pointer;
 }
 
 /* Flexbox layout for the legend */
@@ -253,7 +254,7 @@ path {
 }
 
 .selected {
-  --color: oklch(60% 40% 240) !important;
+  --color: oklch(60% 45% 0) !important;
 
   &:is(path) {
     fill: var(--color);
