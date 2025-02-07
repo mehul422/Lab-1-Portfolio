@@ -127,7 +127,7 @@ else {
             <img src="${project.image}" alt="${project.title}">
             <div class="project-info">
                 <p>${project.description}</p>
-                <span class="project-year">${project.year}</span>
+                <span class="project-year">c. ${project.year}</span>
             </div>
         `;
   
