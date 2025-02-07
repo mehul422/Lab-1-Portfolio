@@ -26,6 +26,7 @@ if (projects.length === 0) {
 }
 
 let selectedIndex = -1; // Global index to track the selected slice
+let query = ''; // Global search query
 
 function renderPieChart(projectsGiven) {
     let newSVG = d3.select('svg');
@@ -61,18 +62,24 @@ function renderPieChart(projectsGiven) {
         legend.selectAll('li')
           .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
 
-        if (selectedIndex === -1) {
-          renderProjects(projects, projectsContainer, 'h2');
-        } else {
-          const selectedYear = pieData[selectedIndex]?.label;
-          if (selectedYear) {
-            const filteredProjects = projects.filter(project => project.year === selectedYear);
-            renderProjects(filteredProjects, projectsContainer, 'h2');
-          } else {
-            console.error('Selected year not found in pieData');
-          }
+        let filteredProjects = projects;
+
+        if (query) {
+            filteredProjects = filteredProjects.filter(project => {
+                let values = Object.values(project).join('\n').toLowerCase();
+                return values.includes(query);
+            });
         }
-      });
+
+        if (selectedIndex !== -1) {
+            const selectedYear = pieData[selectedIndex]?.label;
+            if (selectedYear) {
+                filteredProjects = filteredProjects.filter(project => project.year === selectedYear);
+            }
+        }
+
+        renderProjects(filteredProjects, projectsContainer, 'h2');
+    });
     
     arcData.forEach((d, idx) => {
       legend.append('li')
@@ -85,7 +92,6 @@ function renderPieChart(projectsGiven) {
 renderPieChart(projects);
 
 // Implement search functionality
-let query = '';
 const searchInput = document.querySelector('.searchBar');
 searchInput.addEventListener('input', (event) => {
     query = event.target.value.toLowerCase();
@@ -95,4 +101,4 @@ searchInput.addEventListener('input', (event) => {
     });
     renderProjects(filteredProjects, projectsContainer, 'h2');
     renderPieChart(filteredProjects);
-}); 
+});
