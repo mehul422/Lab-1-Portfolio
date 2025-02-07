@@ -38,31 +38,28 @@ function renderPieChart(projectsGiven) {
     newSVG.selectAll('path').remove();
     let legend = d3.select('.legend');
     legend.selectAll('li').remove();
-  
+    
     // Group projects by year and count the number of projects per year
     let rolledData = d3.rollups(
       projectsGiven,
       (v) => v.length, // Count the number of projects in each year
       (d) => d.year,   // Group by the 'year' property
     );
-  
+    
     // Format the rolled data into an array of objects suitable for the pie chart
     let pieData = rolledData.map(([year, count]) => {
       return { value: count, label: year };
     });
-  
+    
     let colors = d3.scaleOrdinal(d3.schemeTableau10); // Using the schemeTableau10 color scale
-  
+    
     // Arc generator function
     let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-  
+    
     // Pie chart data setup using d3.pie()
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(pieData); // arcData now contains objects with startAngle, endAngle, and value
-  
-    // Define the selectedIndex variable (we will initialize it here)
-    let selectedIndex = -1;
-  
+    
     // Append the paths for each slice with the colors
     newSVG.selectAll('path')
       .data(arcData)
@@ -70,25 +67,27 @@ function renderPieChart(projectsGiven) {
       .append('path')
       .attr('d', arcGenerator)
       .attr('fill', (d, idx) => colors(idx))
-      .on('click', function(event, d) {
-        // Get the index from arcData when clicked
-        const i = arcData.indexOf(d);
+      .on('click', function(event, d) { // Remove `i` and use `this`
+        const i = arcData.indexOf(d); // Get the index from arcData
   
         console.log('Clicked wedge index (i):', i);
         console.log('Clicked data:', d);
   
-        // Toggle the selected index (if it's already selected, reset to -1)
-        selectedIndex = selectedIndex === i ? -1 : i;
+        // Ensure `selectedIndex` is within the bounds of the pieData
+        if (i >= 0 && i < pieData.length) {
+          selectedIndex = selectedIndex === i ? -1 : i;
+        } else {
+          console.error('Invalid selectedIndex:', i);
+        }
   
         // Highlight the selected arc and update the legend
         newSVG.selectAll('path')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Add or remove 'selected' class for the arcs
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
   
-        // Update the legend items' class
         legend.selectAll('li')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Add or remove 'selected' class for the legend items
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected legend item
   
-        // Filter and render projects based on the selected index
+        // Filter and render projects based on selected index
         if (selectedIndex === -1) {
           renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
         } else {
@@ -101,11 +100,11 @@ function renderPieChart(projectsGiven) {
           }
         }
       });
-  
+    
     // Create the legend for the pie chart
     arcData.forEach((d, idx) => {
       legend.append('li')
-            .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
-            .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
+        .attr('class', 'legend-item')
+        .html(`<span class="swatch" style="background-color:${colors(idx)};"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
     });
-  }  
+  }    
