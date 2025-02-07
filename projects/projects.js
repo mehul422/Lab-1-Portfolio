@@ -64,14 +64,28 @@ function renderPieChart(projectsGiven) {
     .enter()
     .append('path')
     .attr('d', arcGenerator)
-    .attr('fill', (d, idx) => colors(idx));
+    .attr('fill', (d, idx) => colors(idx))
+    .on('click', (event, d, idx) => {
+      // Toggle selection state
+      selectedIndex = selectedIndex === idx ? -1 : idx;
 
-  // Create the legend for the pie chart
-  arcData.forEach((d, idx) => {
-    legend.append('li')
-          .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
-          .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
-  });
+      // Update paths to reflect the selected state
+      newSVG.selectAll('path')
+        .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+      // Update the legend to reflect the selected state
+      legend.selectAll('li')
+        .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+      // Filter projects based on the selection (if a year is selected)
+      if (selectedIndex === -1) {
+        renderProjects(projects, projectsContainer, 'h2'); // Show all projects
+      } else {
+        const selectedYear = pieData[selectedIndex].label;
+        const filteredProjects = projects.filter(project => project.year === selectedYear);
+        renderProjects(filteredProjects, projectsContainer, 'h2'); // Show filtered projects
+      }
+    });
 }
 
 // Search functionality
@@ -98,35 +112,3 @@ searchInput.addEventListener('input', (event) => {
 
 // Initially call the render function on page load
 renderPieChart(projects);
-
-let selectedIndex = -1;
-
-let svg = d3.select('svg');
-svg.selectAll('path').remove();
-
-arcs.forEach((arc, i) => {
-  svg.append('path')
-     .attr('d', arc)
-     .attr('fill', colors(i))
-     .on('click', () => {
-       // Toggle selection
-       selectedIndex = selectedIndex === i ? -1 : i;
-       
-       // Update wedges' class
-       svg.selectAll('path')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
-       
-       // Update legend items' class
-       legend.selectAll('li')
-             .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
-
-       // Filter projects based on selection
-       if (selectedIndex === -1) {
-         renderProjects(projects, projectsContainer, 'h2');
-       } else {
-         const selectedYear = pieData[selectedIndex].label;
-         const filteredProjects = projects.filter(project => project.year === selectedYear);
-         renderProjects(filteredProjects, projectsContainer, 'h2');
-       }
-     });
-});
