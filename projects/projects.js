@@ -28,7 +28,7 @@ if (projects.length === 0) {
     }, 500); // Wait for 500ms before rendering the projects
 }
 
-let colors = d3.scaleOrdinal(d3.schemeTableau10); // Colors for the slices
+let colors = d3.scaleOrdinal(d3.schemeTableau10); // Using the schemeTableau10 color scale
 
 // Arc generator function
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
@@ -48,6 +48,7 @@ arcs.forEach((arc, idx) => {
   d3.select('svg')
     .append('path')
     .attr('d', arc)
-    .attr('fill', colors(idx)); 
+    .attr('fill', colors(idx)); // Use colors function to get the color for each slice
 });
+
 
