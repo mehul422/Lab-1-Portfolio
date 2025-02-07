@@ -255,9 +255,6 @@ path {
 
 .selected {
   fill: oklch(60% 45% 0) !important;
-  opacity: 0.7; /* Optional: make selected slice slightly transparent */
-  stroke: #000; /* Optional: add stroke for emphasis */
-  stroke-width: 2px; /* Optional: thicker stroke for better visibility */
 }
 
 /* Highlight the entire legend item when selected */
