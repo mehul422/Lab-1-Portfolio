@@ -195,7 +195,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .selected {
-  --color: oklch(60% 40% 240) !important;
+  --color: oklch(60% 45% 0) !important;
 }
 
 path {
@@ -204,4 +204,9 @@ path {
 
 .legend li.selected {
   font-weight: bold;
+  text-decoration: underline;
+}
+
+.legend li {
+  cursor: pointer;
 }
