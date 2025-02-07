@@ -63,7 +63,7 @@ let legend = d3.select('.legend');
 arcData.forEach((d, idx) => {
     legend.append('li')
           .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
-          .html(`<span class="swatch"></span> Slice ${idx + 1} <em>(${d.value})</em>`);
+          .html(`<span class="swatch"></span> ${data[idx].label} <em>(${data[idx].value})</em>`);
 });
 
 
