@@ -257,10 +257,6 @@ path {
   fill: oklch(60% 45% 0) !important;
 }
 
-#selected:is(path) {
-    fill: var(--color);
-}
-
 /* Media Queries for responsiveness */
 
 /* For medium screens (between 600px and 900px), make the legend items 2 per row */
