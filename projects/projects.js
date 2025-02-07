@@ -34,7 +34,7 @@ let colors = ['gold', 'purple']; // Colors for the slices
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
 // Pie chart data
-let data = [1, 2];
+let data = [1, 2, 3, 4, 5, 5];
 
 // Use d3.pie() to generate start and end angles
 let sliceGenerator = d3.pie(); // This returns a function that calculates start/end angles for slices
