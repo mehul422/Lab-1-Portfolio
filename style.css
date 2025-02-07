@@ -202,9 +202,10 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
-/* Hover effect on the SVG container */
 #projects-pie-plot {
-  position: relative; /* Ensure the SVG container is positioned properly */
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
 }
 
 #projects-pie-plot:has(path:hover) {
