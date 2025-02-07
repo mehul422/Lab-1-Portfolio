@@ -177,3 +177,17 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: repeat(2, 1fr); /* Stack to 2 columns on smaller screens */
   }
 }
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-year {
+  font-size: 0.9em;
+  color: gray;
+  font-style: italic;
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
+}

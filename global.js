@@ -125,7 +125,10 @@ else {
         article.innerHTML = `
             <${headingLevel}>${project.title}</${headingLevel}>
             <img src="${project.image}" alt="${project.title}">
-            <p>${project.description}</p>
+            <div class="project-info">
+                <p>${project.description}</p>
+                <span class="project-year">${project.year}</span>
+            </div>
         `;
   
         // Append the article to the container
