@@ -60,6 +60,9 @@ function renderPieChart(projectsGiven) {
     let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(pieData); // arcData now contains objects with startAngle, endAngle, and value
   
+    // Define the selectedIndex variable (we will initialize it here)
+    let selectedIndex = -1;
+  
     // Append the paths for each slice with the colors
     newSVG.selectAll('path')
       .data(arcData)
@@ -67,28 +70,25 @@ function renderPieChart(projectsGiven) {
       .append('path')
       .attr('d', arcGenerator)
       .attr('fill', (d, idx) => colors(idx))
-      .on('click', function(event, d) { // Remove `i` and use `this`
-        // `this` will be the current `path` element, and `d` is the data bound to it
-        const i = arcData.indexOf(d); // Get the index from arcData
+      .on('click', function(event, d) {
+        // Get the index from arcData when clicked
+        const i = arcData.indexOf(d);
   
         console.log('Clicked wedge index (i):', i);
         console.log('Clicked data:', d);
   
-        // Ensure `selectedIndex` is within the bounds of the pieData
-        if (i >= 0 && i < pieData.length) {
-          selectedIndex = selectedIndex === i ? -1 : i;
-        } else {
-          console.error('Invalid selectedIndex:', i);
-        }
+        // Toggle the selected index (if it's already selected, reset to -1)
+        selectedIndex = selectedIndex === i ? -1 : i;
   
         // Highlight the selected arc and update the legend
         newSVG.selectAll('path')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Add or remove 'selected' class for the arcs
   
+        // Update the legend items' class
         legend.selectAll('li')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected legend item
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Add or remove 'selected' class for the legend items
   
-        // Filter and render projects based on selected index
+        // Filter and render projects based on the selected index
         if (selectedIndex === -1) {
           renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
         } else {
