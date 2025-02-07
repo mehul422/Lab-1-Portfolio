@@ -257,14 +257,8 @@ path {
   fill: oklch(60% 45% 0) !important;
 }
 
-/* Highlight the entire legend item when selected */
-.legend li.selected {
-  font-weight: bold; /* Make the selected legend item stand out */
-  color: oklch(60% 45% 0); /* Same color as selected pie slice */
-}
-
 .legend li.selected .swatch {
-  color: oklch(60% 45% 0); /* Optional: add a border around the swatch */
+  fill: oklch(60% 45% 0); 
 }
 
 /* Media Queries for responsiveness */
