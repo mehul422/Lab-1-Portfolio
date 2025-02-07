@@ -199,8 +199,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr)); /* Responsive layout */
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   border: 1px solid #ddd;
   padding: 10px;
@@ -239,5 +239,21 @@ h1, h2, h3, h4, h5, h6 {
   --text-color: #fff;
   --accent-color: oklch(65% 50% 240);
 }
+
+.container {
+  display: flex;
+  align-items: flex-start; /* Align at the top */
+  justify-content: space-between; /* Space out items */
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.legend li span {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
 
 
