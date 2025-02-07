@@ -1,4 +1,5 @@
 import { fetchJSON, renderProjects } from '../global.js';
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 // Add a loading message
 const projectsContainer = document.querySelector('.projects');
@@ -26,5 +27,12 @@ if (projects.length === 0) {
         renderProjects(projects, projectsContainer, 'h2');
     }, 500); // Wait for 500ms before rendering the projects
 }
+
+let arc = d3.arc().innerRadius(0).outerRadius(50)({
+    startAngle: 0,
+    endAngle: 2 * Math.PI,
+  });
+  
+d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 
