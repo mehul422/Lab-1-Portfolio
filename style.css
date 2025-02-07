@@ -200,7 +200,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .legend {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; /* Allows the items to wrap to the next line */
   gap: 10px;
   border: 1px solid #ddd;
   padding: 10px;
