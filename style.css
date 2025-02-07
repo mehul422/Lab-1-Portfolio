@@ -257,6 +257,11 @@ path {
   fill: oklch(60% 45% 0) !important;
 }
 
+.legend li.selected {
+  font-weight: bold; /* Make the selected legend item stand out */
+  color: oklch(60% 45% 0); /* Same color as selected pie slice */
+}
+
 /* Media Queries for responsiveness */
 
 /* For medium screens (between 600px and 900px), make the legend items 2 per row */
