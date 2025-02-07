@@ -252,6 +252,14 @@ path {
   display: inline-block;
 }
 
+.selected {
+  --color: oklch(60% 40% 240) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
 /* Media Queries for responsiveness */
 
 /* For medium screens (between 600px and 900px), make the legend items 2 per row */
@@ -272,6 +280,8 @@ path {
     align-items: center; /* Center-align items */
   }
 }
+
+
 
 
 
