@@ -254,11 +254,11 @@ path {
 }
 
 .selected {
-  --color: oklch(60% 45% 0) !important; /* Highlight color */
+  --color: oklch(60% 45% 0) !important;
 }
 
-.selected:is(path) {
-  fill: var(--color);
+#selected:is(path) {
+    fill: var(--color);
 }
 
 /* Media Queries for responsiveness */
