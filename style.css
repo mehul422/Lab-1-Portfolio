@@ -258,7 +258,7 @@ path {
 }
 
 .legend li.selected .swatch {
-  fill: oklch(60% 45% 0); 
+  background-color: oklch(60% 45% 0);
 }
 
 /* Media Queries for responsiveness */
