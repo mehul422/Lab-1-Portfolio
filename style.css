@@ -197,3 +197,31 @@ h1, h2, h3, h4, h5, h6 {
   margin-block: 2em;
   overflow: visible;
 }
+
+/* Style the legend container */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr)); /* Responsive layout */
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+/* Style each legend item */
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Style the color swatch */
+.legend-item .swatch {
+  width: 15px;
+  height: 15px;
+  background-color: var(--color);
+  display: inline-block;
+  border-radius: 3px;
+}
