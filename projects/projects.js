@@ -98,4 +98,3 @@ searchInput.addEventListener('input', (event) => {
 
 // Initially call the render function on page load
 renderPieChart(projects);
-

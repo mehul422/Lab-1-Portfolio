@@ -202,11 +202,19 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
-/* Style for the pie chart */
+/* Hover effect on the SVG container */
 #projects-pie-plot {
-  max-width: 20em;
-  margin-block: 2em;
-  overflow: visible;
+  position: relative; /* Ensure the SVG container is positioned properly */
+}
+
+#projects-pie-plot:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
 }
 
 /* Flexbox layout for the legend */
