@@ -112,6 +112,7 @@ else {
         console.error('Error fetching or parsing JSON data:', error);
         return [];
     }
+    
   }
   
   export function renderProjects(projects, containerElement, headingLevel = 'h2') {
