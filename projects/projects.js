@@ -58,10 +58,22 @@ arcs.forEach((arc, idx) => {
     .attr('fill', colors(idx)); // Use colors function to get the color for each slice
 });
 
+// Select the legend container (Make sure there's a <ul class="legend"> in your HTML)
 let legend = d3.select('.legend');
+
+// Append legend items for each slice
 data.forEach((d, idx) => {
-    legend.append('li')
-          .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
-          .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
-})
+    let legendItem = legend.append('li') 
+                           .attr('class', 'legend-item');
+
+    // Append the color swatch
+    legendItem.append('span')
+              .attr('class', 'swatch')
+              .style('background-color', colors(idx)); // Set background color directly
+
+    // Append the text label
+    legendItem.append('span')
+              .text(`Slice ${idx + 1}: ${d}`);
+});
+
 
