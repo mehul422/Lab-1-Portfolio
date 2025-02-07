@@ -72,6 +72,10 @@ function renderPieChart(projectsGiven) {
         // Toggle the selectedIndex for clicked arc
         selectedIndex = selectedIndex === i ? -1 : i;
   
+        // Debugging log to check values
+        console.log('selectedIndex:', selectedIndex);
+        console.log('pieData:', pieData);
+  
         // Highlight the selected arc and update the legend
         svg.selectAll('path')
           .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
@@ -83,9 +87,13 @@ function renderPieChart(projectsGiven) {
         if (selectedIndex === -1) {
           renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
         } else {
-          const selectedYear = pieData[selectedIndex].label; // Get the year of the selected wedge
-          const filteredProjects = projects.filter(project => project.year === selectedYear);
-          renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+          if (pieData[selectedIndex]) {
+            const selectedYear = pieData[selectedIndex].label; // Get the year of the selected wedge
+            const filteredProjects = projects.filter(project => project.year === selectedYear);
+            renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+          } else {
+            console.error('Invalid selectedIndex:', selectedIndex);
+          }
         }
       });
   
@@ -96,6 +104,7 @@ function renderPieChart(projectsGiven) {
             .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
     });
   }
+  
 
 // Add a click event listener to show the projects filtered by the selected year
 let selectedIndex = -1; // No selection initially
