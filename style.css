@@ -200,11 +200,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .legend {
   display: flex;
-  flex-wrap: wrap; /* Allows the items to wrap to the next line */
+  flex-wrap: wrap;
   gap: 10px;
   border: 1px solid #ddd;
   padding: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .legend li {
@@ -215,44 +216,29 @@ h1, h2, h3, h4, h5, h6 {
   background: #f9f9f9;
   border-radius: 5px;
   list-style: none;
+  width: 30%; /* Each item takes 30% of the container width */
 }
 
 .swatch {
   width: 16px;
   height: 16px;
   aspect-ratio: 1 / 1;
-  background-color: var(--color); /* Use the color assigned in JS */
-  border-radius: 50%; /* Makes it circular */
+  background-color: var(--color);
+  border-radius: 50%;
   display: inline-block;
 }
 
-/* Light theme styles */
-.light-theme {
-  --background-color: #fff;
-  --text-color: #000;
-  --accent-color: oklch(65% 50% 240);
+/* Media Queries for different screen sizes */
+@media (max-width: 900px) {
+  .legend li {
+    width: 45%;
+  }
 }
 
-/* Dark theme styles */
-.dark-theme {
-  --background-color: #333;
-  --text-color: #fff;
-  --accent-color: oklch(65% 50% 240);
-}
-
-.container {
-  display: flex;
-  align-items: flex-start; /* Align at the top */
-  justify-content: space-between; /* Space out items */
-  gap: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-.legend li span {
-  width: 10px;
-  height: 10px;
-  margin-right: 10px;
-  display: inline-block;
+@media (max-width: 600px) {
+  .legend li {
+    width: 100%;
+  }
 }
 
 
