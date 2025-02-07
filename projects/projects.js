@@ -48,5 +48,5 @@ arcs.forEach((arc, idx) => {
   d3.select('svg')
     .append('path')
     .attr('d', arc)
-    .attr('fill', colors(index));
+    .attr('fill', colors(idx));
 });
