@@ -124,7 +124,7 @@ function renderPieChart(projectsGiven) {
     .style('background-color', (d, idx) => colors(idx));
 
   legendItems.append('span')
-    .text(d => d.label);
+    .text(d => `${d.label} (${d.value})`); // Include the project count in the legend label
 }
 
 // Search functionality
