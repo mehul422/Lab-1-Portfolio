@@ -28,44 +28,41 @@ if (projects.length === 0) {
     }, 500); // Wait for 500ms before rendering the projects
 }
 
+// Group projects by year and count the number of projects per year
+let rolledData = d3.rollups(
+  projects,
+  (v) => v.length, // Count the number of projects in each year
+  (d) => d.year,   // Group by the 'year' property
+);
+
+// Format the rolled data into an array of objects suitable for the pie chart
+let pieData = rolledData.map(([year, count]) => {
+    return { value: count, label: year };
+});
+
 let colors = d3.scaleOrdinal(d3.schemeTableau10); // Using the schemeTableau10 color scale
 
 // Arc generator function
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
-// Pie chart data
-let data = [
-    { value: 1, label: 'apples' },
-    { value: 2, label: 'oranges' },
-    { value: 3, label: 'mangos' },
-    { value: 4, label: 'pears' },
-    { value: 5, label: 'limes' },
-    { value: 5, label: 'cherries' },
-  ];
-
-// Use d3.pie() to generate start and end angles
+// Pie chart data setup using d3.pie()
 let sliceGenerator = d3.pie().value((d) => d.value);
-let arcData = sliceGenerator(data); // arcData now contains objects with startAngle, endAngle, and value
-
-// Generate the arcs for each slice
-let arcs = arcData.map(d => arcGenerator(d)); // Pass the arc data to arcGenerator to get the path
+let arcData = sliceGenerator(pieData); // arcData now contains objects with startAngle, endAngle, and value
 
 // Append the paths for each slice with the colors
-arcs.forEach((arc, idx) => {
-  d3.select('svg')
-    .append('path')
-    .attr('d', arc)
-    .attr('fill', colors(idx)); // Use colors function to get the color for each slice
-});
+d3.select('svg')
+  .selectAll('path')
+  .data(arcData)
+  .enter()
+  .append('path')
+  .attr('d', arcGenerator)
+  .attr('fill', (d, idx) => colors(idx));
 
+// Create the legend for the pie chart
 let legend = d3.select('.legend');
 
 arcData.forEach((d, idx) => {
     legend.append('li')
           .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
-          .html(`<span class="swatch"></span> ${data[idx].label} <em>(${data[idx].value})</em>`);
+          .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
 });
-
-
-
-
