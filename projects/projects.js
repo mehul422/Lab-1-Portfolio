@@ -73,29 +73,40 @@ function renderPieChart(projectsGiven) {
           .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
   });
 
-  // Add click event listeners to each arc
-  let selectedIndex = -1;
-  arcs.on('click', function(event, d, i) {
-    // Toggle selection
-    selectedIndex = selectedIndex === i ? -1 : i;
+// Add click event listeners to each arc
+let selectedIndex = -1;
 
-    // Update wedges' class
-    arcs.attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+let svg = d3.select('svg');
+svg.selectAll('path').remove();
+arcs.forEach((arc, i) => {
+  svg
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', colors(i))
+    .on('click', () => {
+      selectedIndex = selectedIndex === i ? -1 : i;
 
-    // Update legend items' class
-    legend.selectAll('li')
-          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');
+      // Apply selected class to arcs
+      svg
+        .selectAll('path')
+        .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
 
-    // Filter projects based on selection
-    if (selectedIndex === -1) {
-      renderProjects(projects, projectsContainer, 'h2');
-    } else {
-      const selectedYear = pieData[selectedIndex].label;
-      const filteredProjects = projects.filter(project => project.year === selectedYear);
-      renderProjects(filteredProjects, projectsContainer, 'h2');
-    }
-  });
-}
+      // Apply selected class to legend items
+      legend
+        .selectAll('li')
+        .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+      // Filter and render projects based on selected index
+      if (selectedIndex === -1) {
+        renderProjects(projects, projectsContainer, 'h2');
+      } else {
+        const selectedYear = pieData[selectedIndex].label;
+        const filteredProjects = projects.filter(project => project.year === selectedYear);
+        renderProjects(filteredProjects, projectsContainer, 'h2');
+      }
+    });
+});
+
 
 // Search functionality
 let query = '';
