@@ -254,13 +254,8 @@ path {
 }
 
 .selected {
-  fill: oklch(60% 40% 200); /* Apply the color to the fill */
-  opacity: 0.7; /* Make the selected slice a bit transparent */
-  stroke: #000; /* Add a black outline around the selected slice */
-  stroke-width: 2px; /* Thicker stroke to emphasize selection */
+  --color: oklch(60% 45% 0) !important;
 }
-
-
 
 #selected:is(path) {
     fill: var(--color);
