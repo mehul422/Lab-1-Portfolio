@@ -68,12 +68,15 @@ function renderPieChart(projectsGiven) {
     .attr('d', arcGenerator)
     .attr('fill', (d, idx) => colors(idx))
     .on('click', (event, d, i) => {
-      // Ensure `selectedIndex` is correctly toggled
-      selectedIndex = selectedIndex === i ? -1 : i;
-
-      // Debugging log to check values
       console.log('Clicked wedge index (i):', i);
       console.log('Clicked data:', d);
+
+      // Ensure `selectedIndex` is within the bounds of the pieData
+      if (i >= 0 && i < pieData.length) {
+        selectedIndex = selectedIndex === i ? -1 : i;
+      } else {
+        console.error('Invalid selectedIndex:', i);
+      }
 
       // Highlight the selected arc and update the legend
       newSVG.selectAll('path')
@@ -86,9 +89,13 @@ function renderPieChart(projectsGiven) {
       if (selectedIndex === -1) {
         renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
       } else {
-        const selectedYear = pieData[selectedIndex].label; // Get the year of the selected wedge
-        const filteredProjects = projects.filter(project => project.year === selectedYear);
-        renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+        const selectedYear = pieData[selectedIndex]?.label; // Get the year of the selected wedge
+        if (selectedYear) {
+          const filteredProjects = projects.filter(project => project.year === selectedYear);
+          renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+        } else {
+          console.error('Selected year not found in pieData');
+        }
       }
     });
 
