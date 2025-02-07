@@ -255,6 +255,7 @@ path {
 
 /* Define the color for the selected wedge */
 .selected {
+  opacity: 0.7;
   --color: oklch(60% 45% 0) !important; /* Set the selected color using a CSS variable */
 }
 
