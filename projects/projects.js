@@ -31,67 +31,71 @@ if (projects.length === 0) {
 
 // Function to render the pie chart
 function renderPieChart(projectsGiven) {
-  // Clear the previous chart
-  let newSVG = d3.select('svg');
-  newSVG.selectAll('path').remove();
-  let legend = d3.select('.legend');
-  legend.selectAll('li').remove();
-
-  // Group projects by year and count the number of projects per year
-  let rolledData = d3.rollups(
-    projectsGiven,
-    (v) => v.length, // Count the number of projects in each year
-    (d) => d.year,   // Group by the 'year' property
-  );
-
-  // Format the rolled data into an array of objects suitable for the pie chart
-  let pieData = rolledData.map(([year, count]) => {
-    return { value: count, label: year };
-  });
-
-  let colors = d3.scaleOrdinal(d3.schemeTableau10); // Using the schemeTableau10 color scale
-
-  // Arc generator function
-  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-
-  // Pie chart data setup using d3.pie()
-  let sliceGenerator = d3.pie().value((d) => d.value);
-  let arcData = sliceGenerator(pieData); // arcData now contains objects with startAngle, endAngle, and value
-
-  // Append the paths for each slice with the colors
-  let arcs = newSVG.selectAll('path')
-    .data(arcData)
-    .enter()
-    .append('path')
-    .attr('d', arcGenerator)
-    .attr('fill', (d, idx) => colors(idx))
-    .on('click', (event, d, i) => {
-      selectedIndex = selectedIndex === i ? -1 : i;
-
-      // Highlight the selected arc and update the legend
-      svg.selectAll('path')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
-
-      legend.selectAll('li')
-        .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected legend item
-
-      // Filter and render projects based on selected index
-      if (selectedIndex === -1) {
-        renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
-      } else {
-        const selectedYear = pieData[selectedIndex].label; // Get the year of the selected wedge
-        const filteredProjects = projects.filter(project => project.year === selectedYear);
-        renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
-      }
+    // Clear the previous chart
+    let newSVG = d3.select('svg');
+    newSVG.selectAll('path').remove();
+    let legend = d3.select('.legend');
+    legend.selectAll('li').remove();
+  
+    // Group projects by year and count the number of projects per year
+    let rolledData = d3.rollups(
+      projectsGiven,
+      (v) => v.length, // Count the number of projects in each year
+      (d) => d.year,   // Group by the 'year' property
+    );
+  
+    // Format the rolled data into an array of objects suitable for the pie chart
+    let pieData = rolledData.map(([year, count]) => {
+      return { value: count, label: year };
     });
-
-  // Create the legend for the pie chart
-  arcData.forEach((d, idx) => {
-    legend.append('li')
-          .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
-          .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
-  });
-}
+  
+    let colors = d3.scaleOrdinal(d3.schemeTableau10); // Using the schemeTableau10 color scale
+  
+    // Arc generator function
+    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  
+    // Pie chart data setup using d3.pie()
+    let sliceGenerator = d3.pie().value((d) => d.value);
+    let arcData = sliceGenerator(pieData); // arcData now contains objects with startAngle, endAngle, and value
+  
+    // Select the SVG element once
+    let svg = d3.select('svg');
+  
+    // Append the paths for each slice with the colors
+    let arcs = svg.selectAll('path')
+      .data(arcData)
+      .enter()
+      .append('path')
+      .attr('d', arcGenerator)
+      .attr('fill', (d, idx) => colors(idx))
+      .on('click', (event, d, i) => {
+        // Toggle the selectedIndex for clicked arc
+        selectedIndex = selectedIndex === i ? -1 : i;
+  
+        // Highlight the selected arc and update the legend
+        svg.selectAll('path')
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected arc
+  
+        legend.selectAll('li')
+          .attr('class', (_, idx) => idx === selectedIndex ? 'selected' : '');  // Highlight selected legend item
+  
+        // Filter and render projects based on selected index
+        if (selectedIndex === -1) {
+          renderProjects(projects, projectsContainer, 'h2'); // Render all projects if no wedge is selected
+        } else {
+          const selectedYear = pieData[selectedIndex].label; // Get the year of the selected wedge
+          const filteredProjects = projects.filter(project => project.year === selectedYear);
+          renderProjects(filteredProjects, projectsContainer, 'h2'); // Render projects from the selected year
+        }
+      });
+  
+    // Create the legend for the pie chart
+    arcData.forEach((d, idx) => {
+      legend.append('li')
+            .attr('style', `--color:${colors(idx)}`) // Assign color as a CSS variable
+            .html(`<span class="swatch"></span> ${pieData[idx].label} <em>(${pieData[idx].value})</em>`);
+    });
+  }
 
 // Add a click event listener to show the projects filtered by the selected year
 let selectedIndex = -1; // No selection initially
