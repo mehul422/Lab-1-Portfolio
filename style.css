@@ -198,30 +198,31 @@ h1, h2, h3, h4, h5, h6 {
   overflow: visible;
 }
 
-/* Style the legend container */
 .legend {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr)); /* Responsive layout */
   gap: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   padding: 10px;
-  margin-top: 20px;
-  background: #f9f9f9;
-  border-radius: 5px;
+  margin-top: 10px;
 }
 
-/* Style each legend item */
-.legend-item {
+.legend li {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 5px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  list-style: none;
 }
 
-/* Style the color swatch */
-.legend-item .swatch {
-  width: 15px;
-  height: 15px;
-  background-color: var(--color);
+.swatch {
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color); /* Use the color assigned in JS */
+  border-radius: 50%; /* Makes it circular */
   display: inline-block;
-  border-radius: 3px;
 }
+
