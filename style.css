@@ -192,22 +192,35 @@ h1, h2, h3, h4, h5, h6 {
   font-variant-numeric: oldstyle-nums;
 }
 
+/* Container holding the pie chart and the legend */
+.container {
+  display: flex;
+  flex-direction: row; /* Align items side by side */
+  gap: 20px; /* Space between the pie chart and the legend */
+  justify-content: flex-start; /* Align items to the left */
+  align-items: flex-start; /* Align items to the top */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+/* Style for the pie chart */
 #projects-pie-plot {
   max-width: 20em;
   margin-block: 2em;
   overflow: visible;
 }
 
+/* Flexbox layout for the legend */
 .legend {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allows wrapping of items */
   gap: 10px;
   border: 1px solid #ddd;
   padding: 10px;
   margin-top: 10px;
-  width: 100%;
+  width: 100%; /* Ensure it takes the full available width */
 }
 
+/* Style for each legend item */
 .legend li {
   display: flex;
   align-items: center;
@@ -219,25 +232,34 @@ h1, h2, h3, h4, h5, h6 {
   width: 30%; /* Each item takes 30% of the container width */
 }
 
+/* Swatch styles */
 .swatch {
   width: 16px;
   height: 16px;
   aspect-ratio: 1 / 1;
-  background-color: var(--color);
+  background-color: var(--color); /* Use the color assigned in JS */
   border-radius: 50%;
   display: inline-block;
 }
 
-/* Media Queries for different screen sizes */
+/* Media Queries for responsiveness */
+
+/* For medium screens: 2 columns layout with 3 items per column */
 @media (max-width: 900px) {
   .legend li {
-    width: 45%;
+    width: 45%; /* 2 items per row */
   }
 }
 
+/* For small screens: stack all items vertically */
 @media (max-width: 600px) {
   .legend li {
-    width: 100%;
+    width: 100%; /* Each item takes up the full width */
+  }
+
+  .container {
+    flex-direction: column; /* Stack the pie chart and legend vertically */
+    align-items: center; /* Center-align items */
   }
 }
 
