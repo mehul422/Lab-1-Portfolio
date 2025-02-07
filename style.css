@@ -186,27 +186,97 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-year {
   font-size: 0.9em;
-  font-weight: bold;
-  text-align: center;
+  color: gray;
+  font-style: italic;
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
 }
 
-.project-year span {
-  font-weight: 700;
+/* Container holding the pie chart and the legend */
+.container {
+  display: flex;
+  flex-direction: row; /* Ensures items are aligned side by side */
+  gap: 20px; /* Space between the pie chart and the legend */
+  justify-content: flex-start; /* Align items to the left */
+  align-items: flex-start; /* Align items to the top */
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
-.selected {
-  --color: oklch(60% 45% 0) !important;
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+#projects-pie-plot:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
 }
 
 path {
-  cursor: pointer;
+  transition: 300ms;
 }
 
-.legend li.selected {
-  font-weight: bold;
-  text-decoration: underline;
+/* Flexbox layout for the legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping of legend items */
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 10px;
+  flex: 1; /* Allow legend to take available space */
+  min-width: 15em; /* Minimum width for the legend */
 }
 
+/* Style for each legend item */
 .legend li {
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  list-style: none;
+  width: 30%; /* Width of each legend item in large viewports */
+}
+
+/* Swatch styles */
+.swatch {
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color); /* Use the color assigned in JS */
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.selected {
+  --color: oklch(60% 40% 240) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
+/* Media Queries for responsiveness */
+
+/* For medium screens (between 600px and 900px), make the legend items 2 per row */
+@media (max-width: 900px) {
+  .legend li {
+    width: 45%; /* 2 items per row */
+  }
+}
+
+/* For smaller screens (below 600px), stack the legend items vertically */
+@media (max-width: 600px) {
+  .legend li {
+    width: 100%; /* Each item takes up the full width */
+  }
+
+  .container {
+    flex-direction: column; /* Stack the pie chart and legend vertically */
+    align-items: center; /* Center-align items */
+  }
 }
