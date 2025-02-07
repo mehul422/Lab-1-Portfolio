@@ -254,7 +254,7 @@ path {
 }
 
 .selected {
-  --color: oklch(60% 45% 0) !important;
+  --color: oklch(60% 45% 0) !important; /* Highlight color */
 }
 
 .selected:is(path) {
