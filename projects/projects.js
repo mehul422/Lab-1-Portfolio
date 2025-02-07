@@ -30,6 +30,8 @@ if (projects.length === 0) {
 }
 
 // Function to render the pie chart
+let selectedIndex = -1; // Declare selectedIndex at the top to ensure it's available to the entire script
+
 function renderPieChart(projectsGiven) {
     // Clear the previous chart
     let newSVG = d3.select('svg');
@@ -62,7 +64,7 @@ function renderPieChart(projectsGiven) {
     let svg = d3.select('svg');
   
     // Append the paths for each slice with the colors
-    let arcs = svg.selectAll('path')
+    svg.selectAll('path')
       .data(arcData)
       .enter()
       .append('path')
@@ -71,7 +73,7 @@ function renderPieChart(projectsGiven) {
       .on('click', (event, d, i) => {
         // Toggle the selectedIndex for clicked arc
         selectedIndex = selectedIndex === i ? -1 : i;
-  
+
         // Debugging log to check values
         console.log('selectedIndex:', selectedIndex);
         console.log('pieData:', pieData);
@@ -107,8 +109,6 @@ function renderPieChart(projectsGiven) {
   
 
 // Add a click event listener to show the projects filtered by the selected year
-let selectedIndex = -1; // No selection initially
-
 // Search functionality
 let query = '';
 let searchInput = document.querySelector('.searchBar');
