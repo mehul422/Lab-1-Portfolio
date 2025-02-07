@@ -31,7 +31,7 @@ if (projects.length === 0) {
 
 // Function to render the pie chart
 function renderPieChart(projectsGiven) {
-  // Clear the previous chart
+  // Clear previous chart and legend
   let newSVG = d3.select('svg');
   newSVG.selectAll('path').remove();
   let legend = d3.select('.legend');
@@ -86,6 +86,45 @@ function renderPieChart(projectsGiven) {
         renderProjects(filteredProjects, projectsContainer, 'h2'); // Show filtered projects
       }
     });
+
+  // Add the legend
+  let legendItems = legend.selectAll('li')
+    .data(pieData)
+    .enter()
+    .append('li')
+    .style('list-style-type', 'none')
+    .style('display', 'flex')
+    .style('align-items', 'center')
+    .style('gap', '10px')
+    .on('click', function(event, d, idx) {
+      // Toggle selection on legend item click
+      selectedIndex = selectedIndex === idx ? -1 : idx;
+
+      // Update the pie chart to reflect the selected state
+      newSVG.selectAll('path')
+        .attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+      // Update the legend styles
+      legendItems.attr('class', (_, i) => i === selectedIndex ? 'selected' : '');
+
+      // Filter projects based on the selection (if a year is selected)
+      if (selectedIndex === -1) {
+        renderProjects(projects, projectsContainer, 'h2');
+      } else {
+        const selectedYear = pieData[selectedIndex].label;
+        const filteredProjects = projects.filter(project => project.year === selectedYear);
+        renderProjects(filteredProjects, projectsContainer, 'h2');
+      }
+    });
+
+  // Append legend color circles and labels
+  legendItems.append('div')
+    .style('width', '12px')
+    .style('height', '12px')
+    .style('background-color', (d, idx) => colors(idx));
+
+  legendItems.append('span')
+    .text(d => d.label);
 }
 
 // Search functionality
