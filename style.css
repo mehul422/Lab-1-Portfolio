@@ -267,7 +267,7 @@ path {
 }
 
 .legend li.selected .swatch {
-  border: 2px solid #000; /* Optional: add a border around the swatch */
+  color: oklch(60% 45% 0); /* Optional: add a border around the swatch */
 }
 
 /* Media Queries for responsiveness */
