@@ -5,9 +5,9 @@ let commits = [];
 let selectedCommits = [];
 let xScale, yScale;
 let commitProgress = 100;
-let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
-let commitMaxTime = timeScale.invert(commitProgress);
+let timeScale, commitMaxTime; // Declare timeScale and commitMaxTime here
 
+// Load data and initialize the chart
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
         ...row,
@@ -20,21 +20,15 @@ async function loadData() {
 
     processCommits();
     displayStats();
-    updateTimeSlider();
+    updateTimeSlider(); // Call after data is loaded
 }
 
 function displayStats() {
-    // Process commits first
-    processCommits();
-    
-    // Create the dl element
+    processCommits(); // Ensure commits are processed before stats
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
-    
-    // Add total LOC
     dl.append('dt').html('Total <abbr title="Lines of Code">LOC</abbr>');
     dl.append('dd').text(data.length);
-    
-    // Add total commits
+
     dl.append('dt').text('Total Commits');
     dl.append('dd').text(commits.length);
 
@@ -44,11 +38,11 @@ function displayStats() {
 
     let fileDepths = new Map();
     data.forEach(d => {
-        fileDepths.set(d.file, d.depth); 
+        fileDepths.set(d.file, d.depth);
     });
-    // Calculate the average depth
+
     let totalDepth = Array.from(fileDepths.values()).reduce((sum, depth) => sum + depth, 0);
-    let avgDepth = fileDepths.size > 0 ? (totalDepth / fileDepths.size).toFixed(2) : 0; 
+    let avgDepth = fileDepths.size > 0 ? (totalDepth / fileDepths.size).toFixed(2) : 0;
     dl.append('dt').text("Average File Depth");
     dl.append('dd').text(avgDepth);
 }
@@ -70,16 +64,23 @@ function processCommits() {
           hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
           totalLines: lines.length,
         };
-  
+
         Object.defineProperty(ret, 'lines', {
           value: lines,
           enumerable: false,
           writable: false,
           configurable: false,
         });
-  
+
         return ret;
       });
+
+    // Initialize time scale and max time after commits are processed
+    timeScale = d3.scaleTime()
+      .domain([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)])
+      .range([0, 100]);
+
+    commitMaxTime = timeScale.invert(commitProgress);
 }
 
 function updateTimeSlider() {
@@ -96,12 +97,12 @@ function updateTimeSlider() {
         timeDisplay.text(timeStr);
         selectedTimeDisplay.text(timeStr);
 
-        updateScatterplot();
+        updateScatterplot(); // Update the scatterplot with filtered data
     });
 }
 
-function createScatterplot() {
-    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+function createScatterplot(filteredCommits = commits) {
+    const sortedCommits = d3.sort(filteredCommits, (d) => -d.totalLines);
     const width = 1000;
     const height = 600;
 
@@ -113,7 +114,7 @@ function createScatterplot() {
 
     xScale = d3
         .scaleTime()
-        .domain(d3.extent(commits, (d) => d.datetime))
+        .domain(d3.extent(filteredCommits, (d) => d.datetime))
         .range([0, width])
         .nice();
 
@@ -124,7 +125,7 @@ function createScatterplot() {
 
     const dots = svg.append('g').attr('class', 'dots');
 
-    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
     const rScale = d3
         .scaleSqrt()
         .domain([minLines, maxLines])
@@ -193,6 +194,7 @@ function updateScatterplot() {
     );
 
     // Recreate scatterplot with filtered data
+    d3.select('#chart').selectAll('*').remove(); // Remove previous chart
     createScatterplot(filteredCommits);
 }
 
@@ -224,6 +226,6 @@ function updateTooltipPosition(event) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
-    createScatterplot();
-    brushSelector();
+    createScatterplot();  // Call after data is loaded
 });
+
