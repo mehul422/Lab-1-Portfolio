@@ -339,3 +339,25 @@ dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
   visibility: hidden;
 }
+
+#filter-ui {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+#filter-ui label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+#filter-ui #commit-progress {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#filter-ui #commit-time {
+  margin-left: auto;
+  font-weight: bold;
+}

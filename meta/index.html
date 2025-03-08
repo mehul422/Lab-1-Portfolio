@@ -10,7 +10,7 @@
     <script type="module" src="./main.js"></script>
 </head>
 
-<body class = "meta">
+<body class="meta">
 
     <h1>Meta</h1>
 
@@ -18,12 +18,23 @@
 
     <div id="stats"></div>
 
-    <dl class = "stats">
-
-    </dl>
+    <dl class="stats"></dl>
 
     <h2>Commits by time of day</h2>
 
+    <!-- Filtering UI: Slider and Time Display -->
+    <div id="filter-ui">
+        <label for="commit-progress">
+            Show commits until:
+            <input type="range" id="commit-progress" min="0" max="100" value="100">
+            <time id="commit-time"> </time>
+        </label>
+    </div>
+
+    <!-- Display Selected Time -->
+    <p>Selected Time: <span id="selectedTime"></span></p>
+
+    <!-- Scatter Plot -->
     <div id="chart"></div>
 
     <dl id="commit-tooltip" class="info tooltip">
@@ -48,5 +59,7 @@
     <p id="selection-count">No commits selected</p>
     
     <dl id="language-breakdown" class="stats"></dl>
+
 </body>
 </html>
+

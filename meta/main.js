@@ -3,6 +3,9 @@ let data = [];
 let commits = [];
 let selectedCommits = [];
 let xScale, yScale;
+let commitProgress = 100;
+let timeScale = d3.scaleTime([d3.min(commits, d => d.datetime), d3.max(commits, d => d.datetime)], [0, 100]);
+let commitMaxTime = timeScale.invert(commitProgress);
 
 
 
