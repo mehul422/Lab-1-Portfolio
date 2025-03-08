@@ -97,12 +97,15 @@ function updateTimeSlider() {
         const dateStr = commitMaxTime.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     
         // Combine date and time into the desired format
-        const fullStr = `${dateStr} at ${timeStr}`;
+        const fullStr = `Show commits until: ${dateStr} at ${timeStr}`;
     
+        // Update the "Show commits until" display
         timeDisplay.text(fullStr);
-        selectedTimeDisplay.text(fullStr);
-        updateScatterplot(); // Update the scatterplot with filtered data
-    });    
+    
+        // Update scatterplot with filtered data based on time
+        updateScatterplot();
+    });
+    
 }
 
 function createScatterplot(filteredCommits = commits) {
