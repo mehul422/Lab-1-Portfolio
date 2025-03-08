@@ -1,6 +1,7 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 let data = [];
 let commits = [];
+let selectedCommits = [];
 let xScale, yScale;
 
 
@@ -150,16 +151,19 @@ function createScatterplot() {
     .style('fill-opacity', 0.7) 
     .attr('fill', 'steelblue')
     .on('mouseenter', function (event, d) {
+        d3.select(event.currentTarget).classed('selected', isCommitSelected(d));
         d3.select(event.currentTarget).style('fill-opacity', 1);
         updateTooltipContent(d);
         updateTooltipVisibility(true);
         updateTooltipPosition(event);
       })
-      .on('mouseleave', function () {
+      .on('mouseleave', function (event, d) {
+        d3.select(event.currentTarget).classed('selected', isCommitSelected(d));
         d3.select(event.currentTarget).style('fill-opacity', 0.7); 
         updateTooltipContent({});
         updateTooltipVisibility(false);
-    });
+      });
+      
 
 
     const margin = { top: 10, right: 10, bottom: 30, left: 20 };
@@ -240,25 +244,23 @@ function brushSelector() {
     d3.select(svg).selectAll('.dots, .overlay ~ *').raise();
   }
 
-  function brushed(event) {
-    brushSelection = event.selection;
-    console.log(brushSelection);
-    updateSelection();
-    updateSelectionCount();
-    updateLanguageBreakdown();
+  function brushed(evt) {
+    let brushSelection = evt.selection;
+    selectedCommits = !brushSelection
+      ? []
+      : commits.filter((commit) => {
+          let min = { x: brushSelection[0][0], y: brushSelection[0][1] };
+          let max = { x: brushSelection[1][0], y: brushSelection[1][1] };
+          let x = xScale(commit.date);
+          let y = yScale(commit.hourFrac);
+  
+          return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+        });
   }
 
   function isCommitSelected(commit) {
-    if (!brushSelection) return false;
-
-    const min = { x: brushSelection[0][0], y: brushSelection[0][1] };
-    const max = { x: brushSelection[1][0], y: brushSelection[1][1] };
-
-    const x = xScale(commit.datetime);
-    const y = yScale(commit.hourFrac);
-
-    return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
-}
+    return selectedCommits.includes(commit);
+  }
 
 function updateSelection() {
     d3.selectAll('circle')
