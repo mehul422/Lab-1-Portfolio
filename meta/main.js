@@ -91,14 +91,18 @@ function updateTimeSlider() {
     slider.on('input', function(event) {
         commitProgress = event.target.value;
         commitMaxTime = timeScale.invert(commitProgress);
-
-        // Update commit time display
-        const timeStr = commitMaxTime.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
-        timeDisplay.text(timeStr);
-        selectedTimeDisplay.text(timeStr);
-
+    
+        // Format date and time for display
+        const timeStr = commitMaxTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const dateStr = commitMaxTime.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    
+        // Combine date and time into the desired format
+        const fullStr = `${dateStr} at ${timeStr}`;
+    
+        timeDisplay.text(fullStr);
+        selectedTimeDisplay.text(fullStr);
         updateScatterplot(); // Update the scatterplot with filtered data
-    });
+    });    
 }
 
 function createScatterplot(filteredCommits = commits) {
