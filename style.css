@@ -361,19 +361,3 @@ dl.info[hidden]:not(:hover, :focus-within) {
   margin-left: auto;
   font-weight: bold;
 }
-
-
-circle {
-  r: 0; 
-  transition: r 200ms ease-out; 
-  transform-origin: center; 
-  transform-box: fill-box; 
-}
-
-
-circle:hover {
-  transform: scale(1.5); 
-  r: 50; 
-}
-
-
