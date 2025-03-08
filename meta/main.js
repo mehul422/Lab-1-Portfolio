@@ -27,15 +27,15 @@ function displayStats() {
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
     
     // Add total LOC
-    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+    dl.append('dt').html('Total <abbr title="Lines of Code">LOC</abbr>');
     dl.append('dd').text(data.length);
     
     // Add total commits
-    dl.append('dt').text('Total commits');
+    dl.append('dt').text('Total Commits');
     dl.append('dd').text(commits.length);
 
     let uniqueFiles = new Set(data.map(d => d.file)).size;
-    dl.append('dt').text("# of files in codebase");
+    dl.append('dt').text("Codebase File Count");
     dl.append('dd').text(uniqueFiles);
 
     let fileDepths = new Map();
@@ -45,7 +45,7 @@ function displayStats() {
     // Calculate the average depth
     let totalDepth = Array.from(fileDepths.values()).reduce((sum, depth) => sum + depth, 0);
     let avgDepth = fileDepths.size > 0 ? (totalDepth / fileDepths.size).toFixed(2) : 0; 
-    dl.append('dt').text("Average file depth");
+    dl.append('dt').text("Average File Depth");
     dl.append('dd').text(avgDepth);
     
     const timeCategories = {
@@ -73,7 +73,7 @@ function displayStats() {
     let mostActiveTime = Object.entries(timeCategories).reduce((a, b) => (a[1] > b[1] ? a : b))[0];
 
 
-    dl.append('dt').text("Most productive time of dat");
+    dl.append('dt').text("Most Productivity in the Day");
     dl.append('dd').text(mostActiveTime);
 
     }
