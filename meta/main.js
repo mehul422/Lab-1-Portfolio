@@ -1,13 +1,11 @@
-// Add these functions to your main.js file (or update existing ones)
-
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 let data = [];
 let commits = [];
 let selectedCommits = [];
 let xScale, yScale;
 let commitProgress = 100;
-let timeScale; // Will be properly initialized after data loads
-let commitMaxTime; // Will hold the date corresponding to slider position
+let timeScale; 
+let commitMaxTime; 
 
 async function loadData() {
     data = await d3.csv('loc.csv', (row) => ({
@@ -18,11 +16,12 @@ async function loadData() {
         date: new Date(row.date + 'T00:00' + row.timezone),
         datetime: new Date(row.datetime),
     }));
-      
-    displayStats();
     
-    // Process commits to have access to time data
+    // Process commits first so they're available for displayStats
     processCommits();
+    
+    // Display statistics using the processed commits
+    displayStats();
     
     // Initialize the slider after commits are processed
     initializeSlider();
@@ -247,6 +246,61 @@ function createScatterplot() {
 
     // Create gridlines as an axis with no labels and full-width ticks
     gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
+}
+
+// Add the displayStats function
+function displayStats() {
+    // Create the dl element
+    const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+    
+    // Add total LOC
+    dl.append('dt').html('Total <abbr title="Lines of Code">LOC</abbr>');
+    dl.append('dd').text(data.length);
+    
+    // Add total commits
+    dl.append('dt').text('Total Commits');
+    dl.append('dd').text(commits.length);
+
+    let uniqueFiles = new Set(data.map(d => d.file)).size;
+    dl.append('dt').text("Codebase File Count");
+    dl.append('dd').text(uniqueFiles);
+
+    let fileDepths = new Map();
+    data.forEach(d => {
+        fileDepths.set(d.file, d.depth); 
+    });
+    // Calculate the average depth
+    let totalDepth = Array.from(fileDepths.values()).reduce((sum, depth) => sum + depth, 0);
+    let avgDepth = fileDepths.size > 0 ? (totalDepth / fileDepths.size).toFixed(2) : 0; 
+    dl.append('dt').text("Average File Depth");
+    dl.append('dd').text(avgDepth);
+    
+    const timeCategories = {
+        morning: 0,
+        afternoon: 0,
+        evening: 0,
+        night: 0
+    };
+    // Categorize commits based on hour
+    commits.forEach(commit => {
+        let hour = commit.datetime.getHours(); 
+
+        if (hour >= 6 && hour < 12) {
+            timeCategories.morning++;
+        } else if (hour >= 12 && hour < 18) {
+            timeCategories.afternoon++;
+        } else if (hour >= 18 && hour < 24) {
+            timeCategories.evening++;
+        } else {
+            timeCategories.night++;
+        }
+    });
+
+    // Find the time period with the highest count
+    let mostActiveTime = Object.entries(timeCategories).reduce((a, b) => (a[1] > b[1] ? a : b))[0];
+
+    dl.append('dt').text("Most Productivity in the Day");
+    dl.append('dd').text(mostActiveTime);
 }
 
 // Keep your existing functions
