@@ -9,9 +9,11 @@ let pages = [
   { url: 'index.html', title: 'Home' },
   { url: 'projects/index.html', title: 'Projects' },
   { url: 'contact/index.html', title: 'Contact' },
+  { url: 'meta/index.html', title: 'Meta' },
   { url: 'https://github.com/mehul422', title: 'GitHub' },
   { url: 'cv/resume/index.html', title: 'Resume/CV' }
 ];
+
 
 // Create the <nav> element and add it to the body
 let nav = document.createElement('nav');
