@@ -238,4 +238,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
     createScatterplot();  // Call after data is loaded
 });
-
