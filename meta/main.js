@@ -100,13 +100,16 @@ function updateTimeSlider() {
         const fullStr = `Show commits until: ${dateStr} at ${timeStr}`;
     
         // Update the "Show commits until" display
-        timeDisplay.text(fullStr);
+        timeDisplay.text(fullStr); // Set the full string in the #commit-time element
+    
+        // Update the selected time display separately
+        selectedTimeDisplay.text(`${dateStr} at ${timeStr}`); // Only the formatted date and time
     
         // Update scatterplot with filtered data based on time
         updateScatterplot();
     });
-    
 }
+
 
 function createScatterplot(filteredCommits = commits) {
     const sortedCommits = d3.sort(filteredCommits, (d) => -d.totalLines);
