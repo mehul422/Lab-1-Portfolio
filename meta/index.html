@@ -22,22 +22,17 @@
 
     <h2>Commits by time of day</h2>
 
-    <!-- Filtering UI: Slider and Time Display -->
-    <div id="filter-ui">
-        <label for="commit-progress">
-            Show commits until:
-            <input type="range" id="commit-progress" min="0" max="100" value="100">
-            <time id="commit-time"> </time>
-        </label>
+    <!-- Scrollytelling Container -->
+    <div id="scrollytelling">
+        <div id="scroll-container">
+            <div id="spacer"></div>
+            <div id="items-container"></div>
+        </div>
+        <!-- Scatterplot -->
+        <div id="chart"></div>
     </div>
 
-    <!-- Display Selected Time -->
-    <p>Selected Time: <span id="selectedTime"></span></p>
-
-    <!-- Scatter Plot -->
-    <div id="chart"></div>
-
-    <dl id="commit-tooltip" class="info tooltip">
+    <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
         <dd>
           <a href="" id="commit-link" target="_blank"></a>
@@ -54,11 +49,13 @@
       
         <dt>Lines Edited</dt>
         <dd id="commit-lines"></dd>
-      </dl>
+    </dl>
 
     <p id="selection-count">No commits selected</p>
     
     <dl id="language-breakdown" class="stats"></dl>
+    
+    <!-- File visualization will be inserted here -->
 
 </body>
 </html>

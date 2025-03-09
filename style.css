@@ -21,6 +21,11 @@ body {
   margin-top: 20px; /* Adds space between the theme switcher and body content */
 }
 
+/* Make the Meta page wider */
+:global(body).meta {
+  max-width: min(120ch, 80vw);
+}
+
 /* Style for the theme switcher */
 .color-scheme {
   position: absolute;
@@ -435,4 +440,69 @@ circle.selected {
 
 .line:hover {
   transform: scale(1.5);
+}
+
+/* Scrollytelling styles */
+#scrollytelling {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+#scroll-container {
+  grid-column: 1;
+  position: relative;
+  width: 95%;
+  height: 500px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  margin-bottom: 50px;
+  padding: 0 10px;
+  scrollbar-width: thin;
+}
+
+#chart {
+  grid-column: 2;
+}
+
+#spacer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: none; /* transparent */
+  pointer-events: none;
+}
+
+#items-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.item {
+  padding: 15px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #eee;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.item:hover {
+  background-color: rgba(240, 245, 255, 0.9);
+}
+
+.item a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.item a:hover {
+  text-decoration: underline;
 }
