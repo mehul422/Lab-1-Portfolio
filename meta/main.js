@@ -30,6 +30,9 @@ async function loadData() {
     // Create initial scatterplot
     updateScatterplot();
     
+    // Create initial file visualization
+    updateFileVisualization();
+    
     // Initialize brush selector after scatterplot is created
     brushSelector();
 }
@@ -86,6 +89,9 @@ function filterCommitsByTime() {
     
     // Update language breakdown
     updateLanguageBreakdownFiltered(filteredCommits);
+    
+    // Update file visualization
+    updateFileVisualization();
 }
 
 // Update the date display text
@@ -148,6 +154,60 @@ function updateLanguageBreakdownFiltered(filteredCommits) {
 }
 
 // Updated scatterplot function that recreates the visualization with filtered commits
+// Function to create and update file visualization
+function updateFileVisualization() {
+    // Get all lines from filtered commits
+    let lines = filteredCommits.flatMap((d) => d.lines);
+    
+    // Group lines by file and create file objects
+    let files = d3
+        .groups(lines, (d) => d.file)
+        .map(([name, lines]) => {
+            return { name, lines };
+        });
+    
+    // Sort files by number of lines in descending order
+    files = d3.sort(files, (d) => -d.lines.length);
+    
+    // Create color scale for file types
+    let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+    
+    // Create files container if it doesn't exist
+    if (!document.querySelector('.files')) {
+        const filesContainer = document.createElement('dl');
+        filesContainer.className = 'files';
+        document.querySelector('#chart').insertAdjacentElement('afterend', filesContainer);
+        
+        // Add heading for the section
+        const heading = document.createElement('h2');
+        heading.textContent = 'Files by Size';
+        filesContainer.insertAdjacentElement('beforebegin', heading);
+    }
+    
+    // Clear existing visualization
+    d3.select('.files').selectAll('div').remove();
+    
+    // Create file entries
+    let filesContainer = d3.select('.files').selectAll('div')
+        .data(files)
+        .enter()
+        .append('div');
+    
+    // Add file name and line count
+    filesContainer.append('dt')
+        .append('code')
+        .html(d => `${d.name} <small>${d.lines.length} lines</small>`);
+    
+    // Add dots for each line
+    filesContainer.append('dd')
+        .selectAll('div')
+        .data(d => d.lines)
+        .enter()
+        .append('div')
+        .attr('class', 'line')
+        .style('background', d => fileTypeColors(d.type));
+}
+
 function updateScatterplot() {
     // Remove existing SVG
     d3.select('#chart svg').remove();
